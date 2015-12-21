@@ -14,9 +14,19 @@ namespace SimpleHotelApp
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.EnableVisualStyles();
+            DialogResult result;
+            var role = Role.Default;
+            using (var loginForm = new LoginForm())
+            {
+                result = loginForm.ShowDialog();
+                role = loginForm.ActiveRole;
+            }
+            if (result == DialogResult.OK)
+            {
+                Application.Run(new MainForm(role));
+            }
         }
     }
 }

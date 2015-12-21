@@ -7,14 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SQLite;
+using System.IO;
 
 namespace SimpleHotelApp
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        private Role ActiveRole;
+
+        public MainForm(Role activeRole)
         {
             InitializeComponent();
+            ActiveRole = activeRole;
         }
     }
 }
