@@ -8,10 +8,22 @@ namespace SimpleHotelApp.Actors
 {
     public class Room
     {
+        private Int32 _id;
+        private Int32 _number;
         private bool _busy;
         private Guest _guest;
-        private Decimal _costPerMonth;
-        
+        private Decimal _costPerDay;
+
+        public Int32 ID
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+        public Int32 Number
+        {
+            get { return _number; }
+            set { _number = value; }
+        }
         public bool Busy
         {
             get { return _busy; }
@@ -28,9 +40,19 @@ namespace SimpleHotelApp.Actors
             }
             set { _guest = value; }
         }
-        public Decimal CostPerMonth
+        public Decimal CostPerDay
         {
-            get { return _costPerMonth; }
+            get { return _costPerDay; }
+            set { _costPerDay = value; }
+        }
+
+        public Room(Int32 id, Int32 number, Boolean busy, Guest guest, Decimal costPerDay)
+        {
+            ID = id;
+            Number = number;
+            Busy = busy;
+            Guest = guest;
+            CostPerDay = costPerDay;
         }
     }
 }

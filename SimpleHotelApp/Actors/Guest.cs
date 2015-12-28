@@ -69,5 +69,15 @@ namespace SimpleHotelApp.Actors
             get { return _payMoney; }
             set { _payMoney = value; }
         }
+
+        public static Guest GetByID(Int32 Id)
+        {
+            return new Guest() {Id = Id};
+        }
+
+        public override string ToString()
+        {
+            return Id.ToString();
+        }
     }
 }
