@@ -42,14 +42,14 @@ namespace SimpleHotelApp
                         rooms.Add(new Guest(
                             Convert.ToInt32(r["Id"]), 
                             Convert.ToString(r["FirstName"]),
-                            Convert.ToString(r["SecondName"]),
+                            r["SecondName"] == DBNull.Value ? String.Empty : Convert.ToString(r["SecondName"]),
                             Convert.ToDateTime(r["DateOfBirth"]),
-                            Convert.ToString(r["PassportCode"]),
+                            r["PassportCode"] == DBNull.Value ? String.Empty : Convert.ToString(r["PassportCode"]),
                             Convert.ToString(r["Citizenship"]),
-                            Convert.ToString(r["Location"]),
-                            r["SettlementDate"] == DBNull.Value ? (DateTime?) null : Convert.ToDateTime(r["SettlementDate"]),// == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(r["SettlementDate"])),
-                            r["DepartureDate"] == DBNull.Value ? (DateTime?) null : Convert.ToDateTime(r["DepartureDate"]),// == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(r["DepartureDate"])),
-                            Convert.ToDecimal(r["PayMoney"])));
+                            r["Location"] == DBNull.Value ? String.Empty : Convert.ToString(r["Location"]),
+                            r["SettlementDate"] == DBNull.Value ? (DateTime?) null : Convert.ToDateTime(r["SettlementDate"]),
+                            r["DepartureDate"] == DBNull.Value ? (DateTime?) null : Convert.ToDateTime(r["DepartureDate"]),
+                            r["PayMoney"] == DBNull.Value ? (Decimal?) null : Convert.ToDecimal(r["PayMoney"])));
                     }
 
                     var bindingList = new BindingList<Guest>(rooms);
