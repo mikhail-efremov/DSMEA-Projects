@@ -25,56 +25,14 @@ namespace SimpleHotelApp
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=DataBase.db"))
-            {
-                connect.Open();
-                using (SQLiteCommand fmd = connect.CreateCommand())
-                {
-                    fmd.CommandText = @"SELECT * FROM tblRooms";
-                    fmd.CommandType = CommandType.Text;
-                    
-                    SQLiteDataReader r = fmd.ExecuteReader();
-
-                    var rooms = new List<Room>();
-
-                    while (r.Read())
-                    {
-                        rooms.Add(new Room(Convert.ToInt32(r["Id"]), Convert.ToInt32(r["Number"]),
-                            Convert.ToBoolean(Convert.ToInt32(r["Busy"]) == 1),
-                            Guest.GetByID(Convert.ToInt32(Convert.ToString(r["GuestId"]) == String.Empty ? 0 : r["GuestId"])),
-                            Convert.ToDecimal(r["CostPerDay"])));
-                    }
-
-                    var bindingList = new BindingList<Room>(rooms);
-                    var source = new BindingSource(bindingList, null);
-                    dataGridView1.DataSource = source;
-                }
-            }
+            var roomForm = new RoomsForm(ActiveRole);
+            roomForm.ShowDialog();
         }
 
-        private static DataTable ConvertToDatatable<T>(List<T> data)
+        private void button2_Click(object sender, EventArgs e)
         {
-            PropertyDescriptorCollection props =
-                TypeDescriptor.GetProperties(typeof(T));
-            DataTable table = new DataTable();
-            for (int i = 0; i < props.Count; i++)
-            {
-                PropertyDescriptor prop = props[i];
-                if (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>))
-                    table.Columns.Add(prop.Name, prop.PropertyType.GetGenericArguments()[0]);
-                else
-                    table.Columns.Add(prop.Name, prop.PropertyType);
-            }
-            object[] values = new object[props.Count];
-            foreach (T item in data)
-            {
-                for (int i = 0; i < values.Length; i++)
-                {
-                    values[i] = props[i].GetValue(item);
-                }
-                table.Rows.Add(values);
-            }
-            return table;
+            var guestForm = new GuestsForm(ActiveRole);
+            guestForm.ShowDialog();
         }
 
         /*

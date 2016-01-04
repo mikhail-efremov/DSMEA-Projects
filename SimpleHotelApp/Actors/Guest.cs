@@ -15,9 +15,9 @@ namespace SimpleHotelApp.Actors
         private String _passportCode;
         private String _citizenship;
         private String _location;
-        private DateTime _settlementDate;
-        private DateTime _departureDate;
-        private Decimal _payMoney;
+        private DateTime? _settlementDate;
+        private DateTime? _departureDate;
+        private Decimal? _payMoney;
 
         public Int32 Id
         {
@@ -54,17 +54,17 @@ namespace SimpleHotelApp.Actors
             get { return _location; }
             set { _location = value; }
         }
-        public DateTime SettlementDate 
+        public DateTime? SettlementDate 
         {
             get { return _settlementDate; }
             set { _settlementDate = value; }
         }
-        public DateTime DepartureDate 
+        public DateTime? DepartureDate 
         {
             get { return _departureDate; }
             set { _departureDate = value; }
         }
-        public Decimal PayMoney 
+        public Decimal? PayMoney 
         {
             get { return _payMoney; }
             set { _payMoney = value; }
@@ -78,6 +78,24 @@ namespace SimpleHotelApp.Actors
         public override string ToString()
         {
             return Id.ToString();
+        }
+
+        public Guest() { }
+
+        public Guest(Int32 id, String firstName, String secondName, DateTime dateOfBirth,
+            String passportCode, String citizenship, String location, DateTime? settlementDate,
+                DateTime? departureDate, Decimal? payMoney)
+        {
+            this.Id = id;
+            this.FirstName = firstName;
+            this.SecondName = secondName;
+            this.DateOfBirth = dateOfBirth;
+            this.PassportCode = passportCode;
+            this.Citizenship = citizenship;
+            this.Location = location;
+            this.SettlementDate = settlementDate;
+            this.DepartureDate = departureDate;
+            this.PayMoney = payMoney;
         }
     }
 }

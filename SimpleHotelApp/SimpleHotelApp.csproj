@@ -88,6 +88,12 @@
     <Compile Include="Actors\ICustomer.cs" />
     <Compile Include="Actors\IHuman.cs" />
     <Compile Include="Actors\Room.cs" />
+    <Compile Include="GuestsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GuestsForm.Designer.cs">
+      <DependentUpon>GuestsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,15 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoomsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RoomsForm.Designer.cs">
+      <DependentUpon>RoomsForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="GuestsForm.resx">
+      <DependentUpon>GuestsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -117,6 +132,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="RoomsForm.resx">
+      <DependentUpon>RoomsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
