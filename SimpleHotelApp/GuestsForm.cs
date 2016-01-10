@@ -63,5 +63,17 @@ namespace SimpleHotelApp
                 }
             }
         }
+
+        private void buttonAddGuest_Click(object sender, EventArgs e)
+        {
+            var myObject = Utils.GuestFillForm.ShowAndReturnObject();
+            //    AddGuest();
+        }
+
+        /*
+        public void AddGuest()
+        {
+
+        }*/
     }
 }

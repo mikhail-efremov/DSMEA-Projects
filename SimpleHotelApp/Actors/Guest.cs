@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SQLite;
 
 namespace SimpleHotelApp.Actors
 {
@@ -96,6 +93,43 @@ namespace SimpleHotelApp.Actors
             this.SettlementDate = settlementDate;
             this.DepartureDate = departureDate;
             this.PayMoney = payMoney;
+        }
+
+        public static Guest Create(String firstName, String secondName, DateTime dateOfBirth,
+            String passportCode, String citizenship, String location)
+        {
+            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=DataBase.db"))
+            {
+                connect.Open();
+                var command = new SQLiteCommand(connect);
+
+                command.CommandText = String.Format(
+                    "INSERT INTO [tblGuests]([Id],[FirstName],[SecondName],[DateOfBirth],[PassportCode],[Citizenship],[Location])"
+                    + " VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}');",
+                    100, "vasil", "go", "2007-01-01 10:00:00", "13244", "citizenship", "location");
+                try
+                {
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    connect.Close();
+                }
+            }
+            return new Guest();
+
+            /*
+                        SetConnection();
+            sql_con.Open();
+            sql_cmd = sql_con.CreateCommand();
+            sql_cmd.CommandText = txtQuery;
+            sql_cmd.ExecuteNonQuery();
+            sql_con.Close(); 
+            */
         }
     }
 }
