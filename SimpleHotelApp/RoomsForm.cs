@@ -27,7 +27,7 @@ namespace SimpleHotelApp
         {
             using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=DataBase.db"))
             {
-                connect.Open();
+#warning                connect.Open();
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
                     fmd.CommandText = @"SELECT * FROM tblRooms";

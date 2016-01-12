@@ -16,10 +16,12 @@ namespace SimpleHotelApp
     public partial class GuestsForm : Form
     {
         private Role ActiveRole;
+        private SQLiteConnection _sqlConnection;
 
-        public GuestsForm(Role activeRole)
+        public GuestsForm(SQLiteConnection connection, Role activeRole)
         {
             InitializeComponent();
+            _sqlConnection = connection;
             ActiveRole = activeRole;
         }
 
@@ -27,7 +29,7 @@ namespace SimpleHotelApp
         {
             using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=DataBase.db"))
             {
-                connect.Open();
+              connect.Open();
                 using (SQLiteCommand fmd = connect.CreateCommand())
                 {
                     fmd.CommandText = @"SELECT * FROM tblGuests";
@@ -66,7 +68,7 @@ namespace SimpleHotelApp
 
         private void buttonAddGuest_Click(object sender, EventArgs e)
         {
-            var myObject = Utils.GuestFillForm.ShowAndReturnObject();
+            var myObject = Utils.GuestFillForm.ShowAndReturnObject(_sqlConnection);
             //    AddGuest();
         }
 

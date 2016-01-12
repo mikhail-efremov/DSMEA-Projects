@@ -16,13 +16,15 @@ namespace SimpleHotelApp
     public partial class MainForm : Form
     {
         private Role ActiveRole;
+        private SQLiteConnection _sqlConnection;
 
-        public MainForm(Role activeRole)
+        public MainForm(Role activeRole, SQLiteConnection connection)
         {
             InitializeComponent();
+            _sqlConnection = connection;
             ActiveRole = activeRole;
         }
-
+        
         private void button1_Click(object sender, EventArgs e)
         {
             var roomForm = new RoomsForm(ActiveRole);
@@ -31,7 +33,7 @@ namespace SimpleHotelApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            var guestForm = new GuestsForm(ActiveRole);
+            var guestForm = new GuestsForm(_sqlConnection, ActiveRole);
             guestForm.ShowDialog();
         }
 

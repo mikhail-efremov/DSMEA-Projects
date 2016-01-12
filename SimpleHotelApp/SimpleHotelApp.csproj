@@ -144,6 +144,9 @@
     <EmbeddedResource Include="Utils\GuestFillForm.resx">
       <DependentUpon>GuestFillForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="DataBase.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

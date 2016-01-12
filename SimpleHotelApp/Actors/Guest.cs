@@ -95,41 +95,35 @@ namespace SimpleHotelApp.Actors
             this.PayMoney = payMoney;
         }
 
-        public static Guest Create(String firstName, String secondName, DateTime dateOfBirth,
+        public static Guest Create(SQLiteConnection connection, String firstName, String secondName, DateTime dateOfBirth,
             String passportCode, String citizenship, String location)
         {
-            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=DataBase.db"))
-            {
-                connect.Open();
-                var command = new SQLiteCommand(connect);
+            SQLiteCommand insertSQL = new SQLiteCommand(
+                "INSERT INTO tblGuests " +
+                "(Id, FirstName, SecondName, DateOfBirth, PassportCode, Citizenship, Location) " +
+                "VALUES (?,?,?,?,?,?,?);", connection
+                );
+            insertSQL.Parameters.Add(new SQLiteParameter("Id", 4));
+            insertSQL.Parameters.Add(new SQLiteParameter("FirstName", firstName));
+            insertSQL.Parameters.Add(new SQLiteParameter("SecondName", secondName));
+            insertSQL.Parameters.Add(new SQLiteParameter("DateOfBirth", dateOfBirth));
+            insertSQL.Parameters.Add(new SQLiteParameter("PassportCode", passportCode));
+            insertSQL.Parameters.Add(new SQLiteParameter("Citizenhip", citizenship));
+            insertSQL.Parameters.Add(new SQLiteParameter("Location", location));
 
-                command.CommandText = String.Format(
-                    "INSERT INTO [tblGuests]([Id],[FirstName],[SecondName],[DateOfBirth],[PassportCode],[Citizenship],[Location])"
-                    + " VALUES ('{0}','{1}','{2}','{3}','{4}','{5}','{6}');",
-                    100, "vasil", "go", "2007-01-01 10:00:00", "13244", "citizenship", "location");
-                try
-                {
-                    command.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-                finally
-                {
-                    connect.Close();
-                }
+            try
+            {
+                insertSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+#warning                connection.Close();
             }
             return new Guest();
-
-            /*
-                        SetConnection();
-            sql_con.Open();
-            sql_cmd = sql_con.CreateCommand();
-            sql_cmd.CommandText = txtQuery;
-            sql_cmd.ExecuteNonQuery();
-            sql_con.Close(); 
-            */
         }
     }
 }

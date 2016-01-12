@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Data.SQLite;
 using System.Windows.Forms;
 
 namespace SimpleHotelApp
@@ -14,18 +12,20 @@ namespace SimpleHotelApp
         [STAThread]
         static void Main()
         {
+            var connect = new SQLiteConnection(@"Data Source=DataBase.db");
+#warning            connect.Open();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.EnableVisualStyles();
             DialogResult result;
             var role = Role.Default;
-            using (var loginForm = new LoginForm())
+            using (var loginForm = new LoginForm(connect))
             {
                 result = loginForm.ShowDialog();
                 role = loginForm.ActiveRole;
             }
             if (result == DialogResult.OK)
             {
-                Application.Run(new MainForm(role));
+                Application.Run(new MainForm(role, connect));
             }
         }
     }
