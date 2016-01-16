@@ -103,7 +103,7 @@ namespace SimpleHotelApp.Actors
                 "(Id, FirstName, SecondName, DateOfBirth, PassportCode, Citizenship, Location) " +
                 "VALUES (?,?,?,?,?,?,?);", connection
                 );
-            insertSQL.Parameters.Add(new SQLiteParameter("Id", 4));
+            insertSQL.Parameters.Add(new SQLiteParameter("Id", null));
             insertSQL.Parameters.Add(new SQLiteParameter("FirstName", firstName));
             insertSQL.Parameters.Add(new SQLiteParameter("SecondName", secondName));
             insertSQL.Parameters.Add(new SQLiteParameter("DateOfBirth", dateOfBirth));

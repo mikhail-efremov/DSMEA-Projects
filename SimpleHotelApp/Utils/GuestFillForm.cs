@@ -25,10 +25,13 @@ namespace SimpleHotelApp.Utils
         public static Guest ShowAndReturnObject(SQLiteConnection connection)
         {
             var dlg = new GuestFillForm(connection);
-            if (dlg.ShowDialog() == DialogResult.OK)
+            var dialogResult = dlg.ShowDialog();
+            if (dialogResult == DialogResult.OK)
             {
                 return new Guest();
             }
+            if (dialogResult == DialogResult.Cancel)
+                return null;
 
             throw new ArgumentException("Please fill all guest fields");
         }
