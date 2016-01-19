@@ -67,6 +67,7 @@
             this.ClientSize = new System.Drawing.Size(534, 202);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "RoomsForm";
             this.Text = "RoomsForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();

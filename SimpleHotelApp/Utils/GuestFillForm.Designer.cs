@@ -167,8 +167,9 @@
             this.Controls.Add(this.labelSecondName);
             this.Controls.Add(this.labelFirstName);
             this.Controls.Add(this.buttonGuestReturn);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "GuestFillForm";
-            this.Text = "GuestFillForm";
+            this.Text = "GuestFill";
             this.ResumeLayout(false);
             this.PerformLayout();
 
