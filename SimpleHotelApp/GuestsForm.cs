@@ -53,11 +53,8 @@ namespace SimpleHotelApp
                             r["DepartureDate"] == DBNull.Value ? (DateTime?) null : Convert.ToDateTime(r["DepartureDate"]),
                             r["PayMoney"] == DBNull.Value ? (Decimal?) null : Convert.ToDecimal(r["PayMoney"])));
                     }
-
-                    var bindingList = new BindingList<Guest>(rooms);
-                    var source = new BindingSource(bindingList, null);
-                    dataGridView1.DataSource = source;
-
+                    dataGridView1.DataSource = rooms;
+                    
                     if (ActiveRole == Role.Administrator)
                         dataGridView1.ReadOnly = false;
                     if (ActiveRole == Role.Customer)
@@ -72,10 +69,28 @@ namespace SimpleHotelApp
             //    AddGuest();
         }
 
-        /*
-        public void AddGuest()
+        private void buttonSaveDB_Click(object sender, EventArgs e)
         {
+            var list = dataGridView1.DataSource as List<Guest>;
+            SaveInDataBase(list as List<Guest>);
+        }
 
-        }*/
+        private void SaveInDataBase(List<object> list)
+        {
+            var gList = new List<Guest>();
+            
+
+            foreach (var l in list)
+            {
+                gList.Add(l as Guest);
+            }
+
+            SaveInDataBase(gList);
+        }
+
+        public void SaveInDataBase(List<Guest> guestsList)
+        {
+            Guest.FullUpdateTable(_sqlConnection, guestsList);
+        }
     }
 }

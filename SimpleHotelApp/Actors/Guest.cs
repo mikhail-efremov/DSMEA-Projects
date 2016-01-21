@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SQLite;
 
 namespace SimpleHotelApp.Actors
@@ -124,6 +125,25 @@ namespace SimpleHotelApp.Actors
 #warning                connection.Close();
             }
             return new Guest();
+        }
+
+        public static Guest Create(SQLiteConnection connection, Guest guest)
+        {
+            return Create(connection, guest.FirstName, guest.SecondName, guest.DateOfBirth, guest.PassportCode,
+                guest.Citizenship, guest.Location); 
+        }
+
+        public static void FullUpdateTable(SQLiteConnection connection, List<Guest> list)
+        {
+            var clearComand = "DELETE FROM tblGuests;";
+
+            var sqlCommand = new SQLiteCommand(clearComand, connection);
+            sqlCommand.ExecuteNonQuery();
+
+            foreach (var g in list)
+            {
+                Guest.Create(connection, g);
+            }
         }
     }
 }

@@ -31,6 +31,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonAddGuest = new System.Windows.Forms.Button();
+            this.buttonSaveDB = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -71,11 +72,22 @@
             this.buttonAddGuest.UseVisualStyleBackColor = true;
             this.buttonAddGuest.Click += new System.EventHandler(this.buttonAddGuest_Click);
             // 
+            // buttonSaveDB
+            // 
+            this.buttonSaveDB.Location = new System.Drawing.Point(175, 167);
+            this.buttonSaveDB.Name = "buttonSaveDB";
+            this.buttonSaveDB.Size = new System.Drawing.Size(88, 23);
+            this.buttonSaveDB.TabIndex = 3;
+            this.buttonSaveDB.Text = "Save in base";
+            this.buttonSaveDB.UseVisualStyleBackColor = true;
+            this.buttonSaveDB.Click += new System.EventHandler(this.buttonSaveDB_Click);
+            // 
             // GuestsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(911, 202);
+            this.Controls.Add(this.buttonSaveDB);
             this.Controls.Add(this.buttonAddGuest);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
@@ -91,5 +103,6 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonAddGuest;
+        private System.Windows.Forms.Button buttonSaveDB;
     }
 }
