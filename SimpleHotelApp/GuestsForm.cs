@@ -25,44 +25,6 @@ namespace SimpleHotelApp
             ActiveRole = activeRole;
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=DataBase.db"))
-            {
-              connect.Open();
-                using (SQLiteCommand fmd = connect.CreateCommand())
-                {
-                    fmd.CommandText = @"SELECT * FROM tblGuests";
-                    fmd.CommandType = CommandType.Text;
-
-                    SQLiteDataReader r = fmd.ExecuteReader();
-
-                    var rooms = new List<Guest>();
-                    
-                    while (r.Read())
-                    {
-                        rooms.Add(new Guest(
-                            Convert.ToInt32(r["Id"]), 
-                            Convert.ToString(r["FirstName"]),
-                            r["SecondName"] == DBNull.Value ? String.Empty : Convert.ToString(r["SecondName"]),
-                            Convert.ToDateTime(r["DateOfBirth"]),
-                            r["PassportCode"] == DBNull.Value ? String.Empty : Convert.ToString(r["PassportCode"]),
-                            Convert.ToString(r["Citizenship"]),
-                            r["Location"] == DBNull.Value ? String.Empty : Convert.ToString(r["Location"]),
-                            r["SettlementDate"] == DBNull.Value ? (DateTime?) null : Convert.ToDateTime(r["SettlementDate"]),
-                            r["DepartureDate"] == DBNull.Value ? (DateTime?) null : Convert.ToDateTime(r["DepartureDate"]),
-                            r["PayMoney"] == DBNull.Value ? (Decimal?) null : Convert.ToDecimal(r["PayMoney"])));
-                    }
-                    dataGridView1.DataSource = rooms;
-                    
-                    if (ActiveRole == Role.Administrator)
-                        dataGridView1.ReadOnly = false;
-                    if (ActiveRole == Role.Customer)
-                        dataGridView1.ReadOnly = true;
-                }
-            }
-        }
-
         private void buttonAddGuest_Click(object sender, EventArgs e)
         {
             var myObject = Utils.GuestFillForm.ShowAndReturnObject(_sqlConnection);
@@ -91,6 +53,44 @@ namespace SimpleHotelApp
         public void SaveInDataBase(List<Guest> guestsList)
         {
             Guest.FullUpdateTable(_sqlConnection, guestsList);
+        }
+
+        private void GuestsForm_Load(object sender, EventArgs e)
+        {
+            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=DataBase.db"))
+            {
+                connect.Open();
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"SELECT * FROM tblGuests";
+                    fmd.CommandType = CommandType.Text;
+
+                    SQLiteDataReader r = fmd.ExecuteReader();
+
+                    var rooms = new List<Guest>();
+
+                    while (r.Read())
+                    {
+                        rooms.Add(new Guest(
+                            Convert.ToInt32(r["Id"]),
+                            Convert.ToString(r["FirstName"]),
+                            r["SecondName"] == DBNull.Value ? String.Empty : Convert.ToString(r["SecondName"]),
+                            Convert.ToDateTime(r["DateOfBirth"]),
+                            r["PassportCode"] == DBNull.Value ? String.Empty : Convert.ToString(r["PassportCode"]),
+                            Convert.ToString(r["Citizenship"]),
+                            r["Location"] == DBNull.Value ? String.Empty : Convert.ToString(r["Location"]),
+                            r["SettlementDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(r["SettlementDate"]),
+                            r["DepartureDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(r["DepartureDate"]),
+                            r["PayMoney"] == DBNull.Value ? (Decimal?)null : Convert.ToDecimal(r["PayMoney"])));
+                    }
+                    dataGridView1.DataSource = rooms;
+
+                    if (ActiveRole == Role.Administrator)
+                        dataGridView1.ReadOnly = false;
+                    if (ActiveRole == Role.Customer)
+                        dataGridView1.ReadOnly = true;
+                }
+            }
         }
     }
 }

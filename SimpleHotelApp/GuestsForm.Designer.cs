@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.buttonAddGuest = new System.Windows.Forms.Button();
             this.buttonSaveDB = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -50,21 +49,10 @@
             this.dataGridView1.Size = new System.Drawing.Size(887, 149);
             this.dataGridView1.TabIndex = 0;
             // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.Location = new System.Drawing.Point(12, 167);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Show";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // buttonAddGuest
             // 
             this.buttonAddGuest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonAddGuest.Location = new System.Drawing.Point(94, 168);
+            this.buttonAddGuest.Location = new System.Drawing.Point(12, 167);
             this.buttonAddGuest.Name = "buttonAddGuest";
             this.buttonAddGuest.Size = new System.Drawing.Size(75, 23);
             this.buttonAddGuest.TabIndex = 2;
@@ -74,7 +62,7 @@
             // 
             // buttonSaveDB
             // 
-            this.buttonSaveDB.Location = new System.Drawing.Point(175, 167);
+            this.buttonSaveDB.Location = new System.Drawing.Point(93, 167);
             this.buttonSaveDB.Name = "buttonSaveDB";
             this.buttonSaveDB.Size = new System.Drawing.Size(88, 23);
             this.buttonSaveDB.TabIndex = 3;
@@ -89,10 +77,10 @@
             this.ClientSize = new System.Drawing.Size(911, 202);
             this.Controls.Add(this.buttonSaveDB);
             this.Controls.Add(this.buttonAddGuest);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "GuestsForm";
             this.Text = "GuestsForm";
+            this.Load += new System.EventHandler(this.GuestsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 
@@ -101,7 +89,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonAddGuest;
         private System.Windows.Forms.Button buttonSaveDB;
     }
