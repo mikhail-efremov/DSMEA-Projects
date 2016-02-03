@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.buttonAddGuest = new System.Windows.Forms.Button();
             this.buttonSaveDB = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -49,20 +48,10 @@
             this.dataGridView1.Size = new System.Drawing.Size(887, 149);
             this.dataGridView1.TabIndex = 0;
             // 
-            // buttonAddGuest
-            // 
-            this.buttonAddGuest.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonAddGuest.Location = new System.Drawing.Point(12, 167);
-            this.buttonAddGuest.Name = "buttonAddGuest";
-            this.buttonAddGuest.Size = new System.Drawing.Size(75, 23);
-            this.buttonAddGuest.TabIndex = 2;
-            this.buttonAddGuest.Text = "Add guest";
-            this.buttonAddGuest.UseVisualStyleBackColor = true;
-            this.buttonAddGuest.Click += new System.EventHandler(this.buttonAddGuest_Click);
-            // 
             // buttonSaveDB
             // 
-            this.buttonSaveDB.Location = new System.Drawing.Point(93, 167);
+            this.buttonSaveDB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonSaveDB.Location = new System.Drawing.Point(12, 167);
             this.buttonSaveDB.Name = "buttonSaveDB";
             this.buttonSaveDB.Size = new System.Drawing.Size(88, 23);
             this.buttonSaveDB.TabIndex = 3;
@@ -76,7 +65,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(911, 202);
             this.Controls.Add(this.buttonSaveDB);
-            this.Controls.Add(this.buttonAddGuest);
             this.Controls.Add(this.dataGridView1);
             this.Name = "GuestsForm";
             this.Text = "GuestsForm";
@@ -89,7 +77,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button buttonAddGuest;
         private System.Windows.Forms.Button buttonSaveDB;
     }
 }

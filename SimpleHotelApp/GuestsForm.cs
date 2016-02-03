@@ -28,26 +28,12 @@ namespace SimpleHotelApp
         private void buttonAddGuest_Click(object sender, EventArgs e)
         {
             var myObject = Utils.GuestFillForm.ShowAndReturnObject(_sqlConnection);
-            //    AddGuest();
         }
 
         private void buttonSaveDB_Click(object sender, EventArgs e)
         {
-            var list = dataGridView1.DataSource as List<Guest>;
-            SaveInDataBase(list as List<Guest>);
-        }
-
-        private void SaveInDataBase(List<object> list)
-        {
-            var gList = new List<Guest>();
-            
-
-            foreach (var l in list)
-            {
-                gList.Add(l as Guest);
-            }
-
-            SaveInDataBase(gList);
+            var bindingList = dataGridView1.DataSource as BindingList<Guest>;
+            SaveInDataBase(bindingList.ToList());
         }
 
         public void SaveInDataBase(List<Guest> guestsList)
@@ -83,7 +69,8 @@ namespace SimpleHotelApp
                             r["DepartureDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(r["DepartureDate"]),
                             r["PayMoney"] == DBNull.Value ? (Decimal?)null : Convert.ToDecimal(r["PayMoney"])));
                     }
-                    dataGridView1.DataSource = rooms;
+                    var bindingRooms = new BindingList<Guest>(rooms);
+                    dataGridView1.DataSource = bindingRooms;
 
                     if (ActiveRole == Role.Administrator)
                         dataGridView1.ReadOnly = false;
