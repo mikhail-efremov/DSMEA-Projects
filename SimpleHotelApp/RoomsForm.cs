@@ -21,6 +21,12 @@ namespace SimpleHotelApp
         {
             InitializeComponent();
             ActiveRole = activeRole;
+
+            if (ActiveRole == Role.Customer || ActiveRole == Role.Default)
+            {
+                dataGridView1.AllowUserToAddRows = false;
+                dataGridView1.ReadOnly = true;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
