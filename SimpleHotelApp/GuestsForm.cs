@@ -85,5 +85,32 @@ namespace SimpleHotelApp
                 }
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            var bindingList = (BindingList<Guest>)dataGridView1.DataSource;
+            var a = bindingList.SingleOrDefault(p => p.Id == 1);
+            var nb = new BindingList<Guest>();
+            nb.Add(a);
+            dataGridView1.DataSource = nb;
+        }
+
+        private DataTable ConvertToDataTable<T>(IList<T> data)
+        {
+            PropertyDescriptorCollection properties =
+               TypeDescriptor.GetProperties(typeof(T));
+            DataTable table = new DataTable();
+            foreach (PropertyDescriptor prop in properties)
+                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            foreach (T item in data)
+            {
+                DataRow row = table.NewRow();
+                foreach (PropertyDescriptor prop in properties)
+                    row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+                table.Rows.Add(row);
+            }
+            return table;
+
+        }
     }
 }
