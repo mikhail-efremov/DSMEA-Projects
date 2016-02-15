@@ -122,7 +122,37 @@ namespace SimpleHotelApp.Actors
             }
             finally
             {
-#warning                connection.Close();
+            }
+            return new Guest();
+        }
+
+        public Guest Update(SQLiteConnection connection)
+        {
+            SQLiteCommand insertSQL = new SQLiteCommand(
+                "Update tblGuests " +
+                "set FirstName = :firstName, SecondName = :secondName, " +
+                "DateOfBirth = :dateOfBirth, PassportCode = :passportCode, " +
+                "Citizenship = :citizenhip, Location = :location " +
+                "where Id = :id", connection
+                );
+            insertSQL.Parameters.Add(new SQLiteParameter("firstName", FirstName));
+            insertSQL.Parameters.Add(new SQLiteParameter("secondName", SecondName));
+            insertSQL.Parameters.Add(new SQLiteParameter("dateOfBirth", DateOfBirth));
+            insertSQL.Parameters.Add(new SQLiteParameter("passportCode", PassportCode));
+            insertSQL.Parameters.Add(new SQLiteParameter("citizenhip", Citizenship));
+            insertSQL.Parameters.Add(new SQLiteParameter("location", Location));
+            insertSQL.Parameters.Add(new SQLiteParameter("id", Id));
+
+            try
+            {
+                insertSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
             }
             return new Guest();
         }
@@ -143,6 +173,14 @@ namespace SimpleHotelApp.Actors
             foreach (var g in list)
             {
                 Guest.Create(connection, g);
+            }
+        }
+
+        public static void UpdateTableGuests(SQLiteConnection connection, List<Guest> list)
+        {
+            foreach (var g in list)
+            {
+                g.Update(connection);
             }
         }
     }

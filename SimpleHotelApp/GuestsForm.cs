@@ -15,6 +15,23 @@ namespace SimpleHotelApp
 {
     public partial class GuestsForm : Form
     {
+        public WorkingStatus ActiveStatus
+        {
+            get
+            {
+                return _activeStatus;
+            }
+            set
+            {
+                _activeStatus = value;
+                if (_activeStatus == WorkingStatus.Normal)
+                    dataGridView1.AllowUserToAddRows = true;
+                else if (_activeStatus == WorkingStatus.Searching)
+                    dataGridView1.AllowUserToAddRows = false;
+            }
+        }
+
+        private WorkingStatus _activeStatus;
         private Role ActiveRole;
         private SQLiteConnection _sqlConnection;
 
@@ -23,6 +40,7 @@ namespace SimpleHotelApp
             InitializeComponent();
             _sqlConnection = connection;
             ActiveRole = activeRole;
+            ActiveStatus = WorkingStatus.Normal;
 
             if (ActiveRole == Role.Customer || ActiveRole == Role.Default)
             {
@@ -44,10 +62,52 @@ namespace SimpleHotelApp
 
         public void SaveInDataBase(List<Guest> guestsList)
         {
-            Guest.FullUpdateTable(_sqlConnection, guestsList);
+            if (ActiveStatus == WorkingStatus.Searching)
+                Guest.UpdateTableGuests(_sqlConnection, guestsList);
+            else
+            if (ActiveStatus == WorkingStatus.Normal)
+                Guest.FullUpdateTable(_sqlConnection, guestsList);
         }
 
         private void GuestsForm_Load(object sender, EventArgs e)
+        {
+            LoadFullGuestList();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ActiveStatus = WorkingStatus.Searching;
+            var bindingList = (BindingList<Guest>)dataGridView1.DataSource;
+            var a = bindingList.SingleOrDefault(p => p.Id == 1);
+            var nb = new BindingList<Guest>();
+            nb.Add(a);
+            dataGridView1.DataSource = nb;
+        }
+
+        private void buttonResetFilter_Click(object sender, EventArgs e)
+        {
+            ActiveStatus = WorkingStatus.Normal;
+            LoadFullGuestList();
+        }
+
+        private DataTable ConvertToDataTable<T>(IList<T> data)
+        {
+            PropertyDescriptorCollection properties =
+               TypeDescriptor.GetProperties(typeof(T));
+            DataTable table = new DataTable();
+            foreach (PropertyDescriptor prop in properties)
+                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+            foreach (T item in data)
+            {
+                DataRow row = table.NewRow();
+                foreach (PropertyDescriptor prop in properties)
+                    row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+                table.Rows.Add(row);
+            }
+            return table;
+        }
+
+        private void LoadFullGuestList()
         {
             using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=DataBase.db"))
             {
@@ -85,32 +145,11 @@ namespace SimpleHotelApp
                 }
             }
         }
+    }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            var bindingList = (BindingList<Guest>)dataGridView1.DataSource;
-            var a = bindingList.SingleOrDefault(p => p.Id == 1);
-            var nb = new BindingList<Guest>();
-            nb.Add(a);
-            dataGridView1.DataSource = nb;
-        }
-
-        private DataTable ConvertToDataTable<T>(IList<T> data)
-        {
-            PropertyDescriptorCollection properties =
-               TypeDescriptor.GetProperties(typeof(T));
-            DataTable table = new DataTable();
-            foreach (PropertyDescriptor prop in properties)
-                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
-            foreach (T item in data)
-            {
-                DataRow row = table.NewRow();
-                foreach (PropertyDescriptor prop in properties)
-                    row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
-                table.Rows.Add(row);
-            }
-            return table;
-
-        }
+    public enum WorkingStatus
+    {
+        Normal = 0,
+        Searching = 1
     }
 }
