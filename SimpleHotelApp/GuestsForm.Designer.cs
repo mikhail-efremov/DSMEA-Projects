@@ -32,6 +32,26 @@
             this.buttonSaveDB = new System.Windows.Forms.Button();
             this.buttonFilter = new System.Windows.Forms.Button();
             this.buttonResetFilter = new System.Windows.Forms.Button();
+            this.labelId = new System.Windows.Forms.Label();
+            this.labelFirstName = new System.Windows.Forms.Label();
+            this.labelSecondName = new System.Windows.Forms.Label();
+            this.labelDateOfBirth = new System.Windows.Forms.Label();
+            this.labelPassportCode = new System.Windows.Forms.Label();
+            this.labelCitizenship = new System.Windows.Forms.Label();
+            this.labelLocation = new System.Windows.Forms.Label();
+            this.labelSettlementDate = new System.Windows.Forms.Label();
+            this.labelDepartureDate = new System.Windows.Forms.Label();
+            this.labelPayMoney = new System.Windows.Forms.Label();
+            this.textBoxId = new System.Windows.Forms.TextBox();
+            this.textBoxFirstName = new System.Windows.Forms.TextBox();
+            this.textBoxSecondName = new System.Windows.Forms.TextBox();
+            this.textBoxDateOfBirth = new System.Windows.Forms.TextBox();
+            this.textBoxPassCode = new System.Windows.Forms.TextBox();
+            this.textBoxCitizenship = new System.Windows.Forms.TextBox();
+            this.textBoxLocation = new System.Windows.Forms.TextBox();
+            this.textBoxSettlementDate = new System.Windows.Forms.TextBox();
+            this.textBoxDepartDate = new System.Windows.Forms.TextBox();
+            this.textBoxPayMoney = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,15 +67,15 @@
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(887, 149);
+            this.dataGridView1.Size = new System.Drawing.Size(887, 266);
             this.dataGridView1.TabIndex = 0;
             // 
             // buttonSaveDB
             // 
             this.buttonSaveDB.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.buttonSaveDB.Location = new System.Drawing.Point(12, 167);
+            this.buttonSaveDB.Location = new System.Drawing.Point(10, 284);
             this.buttonSaveDB.Name = "buttonSaveDB";
-            this.buttonSaveDB.Size = new System.Drawing.Size(88, 23);
+            this.buttonSaveDB.Size = new System.Drawing.Size(85, 23);
             this.buttonSaveDB.TabIndex = 3;
             this.buttonSaveDB.Text = "Save in base";
             this.buttonSaveDB.UseVisualStyleBackColor = true;
@@ -63,7 +83,8 @@
             // 
             // buttonFilter
             // 
-            this.buttonFilter.Location = new System.Drawing.Point(117, 167);
+            this.buttonFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonFilter.Location = new System.Drawing.Point(101, 284);
             this.buttonFilter.Name = "buttonFilter";
             this.buttonFilter.Size = new System.Drawing.Size(75, 23);
             this.buttonFilter.TabIndex = 4;
@@ -73,7 +94,8 @@
             // 
             // buttonResetFilter
             // 
-            this.buttonResetFilter.Location = new System.Drawing.Point(199, 167);
+            this.buttonResetFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.buttonResetFilter.Location = new System.Drawing.Point(182, 284);
             this.buttonResetFilter.Name = "buttonResetFilter";
             this.buttonResetFilter.Size = new System.Drawing.Size(75, 23);
             this.buttonResetFilter.TabIndex = 5;
@@ -81,11 +103,191 @@
             this.buttonResetFilter.UseVisualStyleBackColor = true;
             this.buttonResetFilter.Click += new System.EventHandler(this.buttonResetFilter_Click);
             // 
+            // labelId
+            // 
+            this.labelId.AutoSize = true;
+            this.labelId.Location = new System.Drawing.Point(12, 319);
+            this.labelId.Name = "labelId";
+            this.labelId.Size = new System.Drawing.Size(16, 13);
+            this.labelId.TabIndex = 6;
+            this.labelId.Text = "Id";
+            // 
+            // labelFirstName
+            // 
+            this.labelFirstName.AutoSize = true;
+            this.labelFirstName.Location = new System.Drawing.Point(63, 319);
+            this.labelFirstName.Name = "labelFirstName";
+            this.labelFirstName.Size = new System.Drawing.Size(54, 13);
+            this.labelFirstName.TabIndex = 7;
+            this.labelFirstName.Text = "FirstName";
+            // 
+            // labelSecondName
+            // 
+            this.labelSecondName.AutoSize = true;
+            this.labelSecondName.Location = new System.Drawing.Point(142, 319);
+            this.labelSecondName.Name = "labelSecondName";
+            this.labelSecondName.Size = new System.Drawing.Size(72, 13);
+            this.labelSecondName.TabIndex = 8;
+            this.labelSecondName.Text = "SecondName";
+            // 
+            // labelDateOfBirth
+            // 
+            this.labelDateOfBirth.AutoSize = true;
+            this.labelDateOfBirth.Location = new System.Drawing.Point(240, 319);
+            this.labelDateOfBirth.Name = "labelDateOfBirth";
+            this.labelDateOfBirth.Size = new System.Drawing.Size(62, 13);
+            this.labelDateOfBirth.TabIndex = 9;
+            this.labelDateOfBirth.Text = "DateOfBirth";
+            // 
+            // labelPassportCode
+            // 
+            this.labelPassportCode.AutoSize = true;
+            this.labelPassportCode.Location = new System.Drawing.Point(332, 319);
+            this.labelPassportCode.Name = "labelPassportCode";
+            this.labelPassportCode.Size = new System.Drawing.Size(73, 13);
+            this.labelPassportCode.TabIndex = 10;
+            this.labelPassportCode.Text = "PassportCode";
+            // 
+            // labelCitizenship
+            // 
+            this.labelCitizenship.AutoSize = true;
+            this.labelCitizenship.Location = new System.Drawing.Point(429, 319);
+            this.labelCitizenship.Name = "labelCitizenship";
+            this.labelCitizenship.Size = new System.Drawing.Size(57, 13);
+            this.labelCitizenship.TabIndex = 11;
+            this.labelCitizenship.Text = "Citizenship";
+            // 
+            // labelLocation
+            // 
+            this.labelLocation.AutoSize = true;
+            this.labelLocation.Location = new System.Drawing.Point(507, 319);
+            this.labelLocation.Name = "labelLocation";
+            this.labelLocation.Size = new System.Drawing.Size(48, 13);
+            this.labelLocation.TabIndex = 12;
+            this.labelLocation.Text = "Location";
+            // 
+            // labelSettlementDate
+            // 
+            this.labelSettlementDate.AutoSize = true;
+            this.labelSettlementDate.Location = new System.Drawing.Point(585, 319);
+            this.labelSettlementDate.Name = "labelSettlementDate";
+            this.labelSettlementDate.Size = new System.Drawing.Size(80, 13);
+            this.labelSettlementDate.TabIndex = 13;
+            this.labelSettlementDate.Text = "SettlementDate";
+            // 
+            // labelDepartureDate
+            // 
+            this.labelDepartureDate.AutoSize = true;
+            this.labelDepartureDate.Location = new System.Drawing.Point(691, 319);
+            this.labelDepartureDate.Name = "labelDepartureDate";
+            this.labelDepartureDate.Size = new System.Drawing.Size(77, 13);
+            this.labelDepartureDate.TabIndex = 14;
+            this.labelDepartureDate.Text = "DepartureDate";
+            // 
+            // labelPayMoney
+            // 
+            this.labelPayMoney.AutoSize = true;
+            this.labelPayMoney.Location = new System.Drawing.Point(799, 319);
+            this.labelPayMoney.Name = "labelPayMoney";
+            this.labelPayMoney.Size = new System.Drawing.Size(57, 13);
+            this.labelPayMoney.TabIndex = 15;
+            this.labelPayMoney.Text = "PayMoney";
+            // 
+            // textBoxId
+            // 
+            this.textBoxId.Location = new System.Drawing.Point(15, 336);
+            this.textBoxId.Name = "textBoxId";
+            this.textBoxId.Size = new System.Drawing.Size(45, 20);
+            this.textBoxId.TabIndex = 16;
+            // 
+            // textBoxFirstName
+            // 
+            this.textBoxFirstName.Location = new System.Drawing.Point(66, 335);
+            this.textBoxFirstName.Name = "textBoxFirstName";
+            this.textBoxFirstName.Size = new System.Drawing.Size(73, 20);
+            this.textBoxFirstName.TabIndex = 17;
+            // 
+            // textBoxSecondName
+            // 
+            this.textBoxSecondName.Location = new System.Drawing.Point(145, 335);
+            this.textBoxSecondName.Name = "textBoxSecondName";
+            this.textBoxSecondName.Size = new System.Drawing.Size(92, 20);
+            this.textBoxSecondName.TabIndex = 18;
+            // 
+            // textBoxDateOfBirth
+            // 
+            this.textBoxDateOfBirth.Location = new System.Drawing.Point(243, 335);
+            this.textBoxDateOfBirth.Name = "textBoxDateOfBirth";
+            this.textBoxDateOfBirth.Size = new System.Drawing.Size(86, 20);
+            this.textBoxDateOfBirth.TabIndex = 19;
+            // 
+            // textBoxPassCode
+            // 
+            this.textBoxPassCode.Location = new System.Drawing.Point(335, 335);
+            this.textBoxPassCode.Name = "textBoxPassCode";
+            this.textBoxPassCode.Size = new System.Drawing.Size(91, 20);
+            this.textBoxPassCode.TabIndex = 20;
+            // 
+            // textBoxCitizenship
+            // 
+            this.textBoxCitizenship.Location = new System.Drawing.Point(432, 335);
+            this.textBoxCitizenship.Name = "textBoxCitizenship";
+            this.textBoxCitizenship.Size = new System.Drawing.Size(72, 20);
+            this.textBoxCitizenship.TabIndex = 21;
+            // 
+            // textBoxLocation
+            // 
+            this.textBoxLocation.Location = new System.Drawing.Point(510, 335);
+            this.textBoxLocation.Name = "textBoxLocation";
+            this.textBoxLocation.Size = new System.Drawing.Size(72, 20);
+            this.textBoxLocation.TabIndex = 22;
+            // 
+            // textBoxSettlementDate
+            // 
+            this.textBoxSettlementDate.Location = new System.Drawing.Point(588, 335);
+            this.textBoxSettlementDate.Name = "textBoxSettlementDate";
+            this.textBoxSettlementDate.Size = new System.Drawing.Size(100, 20);
+            this.textBoxSettlementDate.TabIndex = 23;
+            // 
+            // textBoxDepartDate
+            // 
+            this.textBoxDepartDate.Location = new System.Drawing.Point(694, 336);
+            this.textBoxDepartDate.Name = "textBoxDepartDate";
+            this.textBoxDepartDate.Size = new System.Drawing.Size(102, 20);
+            this.textBoxDepartDate.TabIndex = 24;
+            // 
+            // textBoxPayMoney
+            // 
+            this.textBoxPayMoney.Location = new System.Drawing.Point(802, 335);
+            this.textBoxPayMoney.Name = "textBoxPayMoney";
+            this.textBoxPayMoney.Size = new System.Drawing.Size(97, 20);
+            this.textBoxPayMoney.TabIndex = 25;
+            // 
             // GuestsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(911, 202);
+            this.ClientSize = new System.Drawing.Size(911, 365);
+            this.Controls.Add(this.textBoxPayMoney);
+            this.Controls.Add(this.textBoxDepartDate);
+            this.Controls.Add(this.textBoxSettlementDate);
+            this.Controls.Add(this.textBoxLocation);
+            this.Controls.Add(this.textBoxCitizenship);
+            this.Controls.Add(this.textBoxPassCode);
+            this.Controls.Add(this.textBoxDateOfBirth);
+            this.Controls.Add(this.textBoxSecondName);
+            this.Controls.Add(this.textBoxFirstName);
+            this.Controls.Add(this.textBoxId);
+            this.Controls.Add(this.labelPayMoney);
+            this.Controls.Add(this.labelDepartureDate);
+            this.Controls.Add(this.labelSettlementDate);
+            this.Controls.Add(this.labelLocation);
+            this.Controls.Add(this.labelCitizenship);
+            this.Controls.Add(this.labelPassportCode);
+            this.Controls.Add(this.labelDateOfBirth);
+            this.Controls.Add(this.labelSecondName);
+            this.Controls.Add(this.labelFirstName);
+            this.Controls.Add(this.labelId);
             this.Controls.Add(this.buttonResetFilter);
             this.Controls.Add(this.buttonFilter);
             this.Controls.Add(this.buttonSaveDB);
@@ -95,6 +297,7 @@
             this.Load += new System.EventHandler(this.GuestsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -104,5 +307,25 @@
         private System.Windows.Forms.Button buttonSaveDB;
         private System.Windows.Forms.Button buttonFilter;
         private System.Windows.Forms.Button buttonResetFilter;
+        private System.Windows.Forms.Label labelId;
+        private System.Windows.Forms.Label labelFirstName;
+        private System.Windows.Forms.Label labelSecondName;
+        private System.Windows.Forms.Label labelDateOfBirth;
+        private System.Windows.Forms.Label labelPassportCode;
+        private System.Windows.Forms.Label labelCitizenship;
+        private System.Windows.Forms.Label labelLocation;
+        private System.Windows.Forms.Label labelSettlementDate;
+        private System.Windows.Forms.Label labelDepartureDate;
+        private System.Windows.Forms.Label labelPayMoney;
+        private System.Windows.Forms.TextBox textBoxId;
+        private System.Windows.Forms.TextBox textBoxFirstName;
+        private System.Windows.Forms.TextBox textBoxSecondName;
+        private System.Windows.Forms.TextBox textBoxDateOfBirth;
+        private System.Windows.Forms.TextBox textBoxPassCode;
+        private System.Windows.Forms.TextBox textBoxCitizenship;
+        private System.Windows.Forms.TextBox textBoxLocation;
+        private System.Windows.Forms.TextBox textBoxSettlementDate;
+        private System.Windows.Forms.TextBox textBoxDepartDate;
+        private System.Windows.Forms.TextBox textBoxPayMoney;
     }
 }

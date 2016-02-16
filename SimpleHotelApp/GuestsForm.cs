@@ -30,7 +30,7 @@ namespace SimpleHotelApp
                     dataGridView1.AllowUserToAddRows = false;
             }
         }
-
+        
         private WorkingStatus _activeStatus;
         private Role ActiveRole;
         private SQLiteConnection _sqlConnection;
@@ -78,9 +78,8 @@ namespace SimpleHotelApp
         {
             ActiveStatus = WorkingStatus.Searching;
             var bindingList = (BindingList<Guest>)dataGridView1.DataSource;
-            var a = bindingList.SingleOrDefault(p => p.Id == 1);
-            var nb = new BindingList<Guest>();
-            nb.Add(a);
+            var a = Filter(bindingList);
+            var nb = new BindingList<Guest>(a.ToList());
             dataGridView1.DataSource = nb;
         }
 
@@ -144,6 +143,11 @@ namespace SimpleHotelApp
                         dataGridView1.ReadOnly = true;
                 }
             }
+        }
+
+        private List<Guest> Filter(BindingList<Guest> bindingList)
+        {
+            return (bindingList.Where(p => p.FirstName.Contains(""))).ToList();
         }
     }
 
