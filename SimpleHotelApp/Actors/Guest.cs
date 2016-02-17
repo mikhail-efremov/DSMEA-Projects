@@ -75,7 +75,7 @@ namespace SimpleHotelApp.Actors
 
         public override string ToString()
         {
-            return Id.ToString();
+            return String.Format("{0} {1}", FirstName, SecondName);
         }
 
         public Guest() { }

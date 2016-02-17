@@ -42,16 +42,16 @@
             this.labelSettlementDate = new System.Windows.Forms.Label();
             this.labelDepartureDate = new System.Windows.Forms.Label();
             this.labelPayMoney = new System.Windows.Forms.Label();
-            this.textBoxId = new System.Windows.Forms.TextBox();
-            this.textBoxFirstName = new System.Windows.Forms.TextBox();
-            this.textBoxSecondName = new System.Windows.Forms.TextBox();
-            this.textBoxDateOfBirth = new System.Windows.Forms.TextBox();
-            this.textBoxPassCode = new System.Windows.Forms.TextBox();
-            this.textBoxCitizenship = new System.Windows.Forms.TextBox();
-            this.textBoxLocation = new System.Windows.Forms.TextBox();
-            this.textBoxSettlementDate = new System.Windows.Forms.TextBox();
-            this.textBoxDepartDate = new System.Windows.Forms.TextBox();
-            this.textBoxPayMoney = new System.Windows.Forms.TextBox();
+            this.filterId = new System.Windows.Forms.TextBox();
+            this.filterFirstName = new System.Windows.Forms.TextBox();
+            this.filterSecondName = new System.Windows.Forms.TextBox();
+            this.filterDateOfBirth = new System.Windows.Forms.TextBox();
+            this.filterPassCode = new System.Windows.Forms.TextBox();
+            this.filterCitizenship = new System.Windows.Forms.TextBox();
+            this.filterLocation = new System.Windows.Forms.TextBox();
+            this.filterSettlementDate = new System.Windows.Forms.TextBox();
+            this.filterDepartDate = new System.Windows.Forms.TextBox();
+            this.filterPayMoney = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -69,6 +69,7 @@
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.Size = new System.Drawing.Size(887, 266);
             this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // buttonSaveDB
             // 
@@ -193,91 +194,91 @@
             this.labelPayMoney.TabIndex = 15;
             this.labelPayMoney.Text = "PayMoney";
             // 
-            // textBoxId
+            // filterId
             // 
-            this.textBoxId.Location = new System.Drawing.Point(15, 336);
-            this.textBoxId.Name = "textBoxId";
-            this.textBoxId.Size = new System.Drawing.Size(45, 20);
-            this.textBoxId.TabIndex = 16;
+            this.filterId.Location = new System.Drawing.Point(15, 336);
+            this.filterId.Name = "filterId";
+            this.filterId.Size = new System.Drawing.Size(45, 20);
+            this.filterId.TabIndex = 16;
             // 
-            // textBoxFirstName
+            // filterFirstName
             // 
-            this.textBoxFirstName.Location = new System.Drawing.Point(66, 335);
-            this.textBoxFirstName.Name = "textBoxFirstName";
-            this.textBoxFirstName.Size = new System.Drawing.Size(73, 20);
-            this.textBoxFirstName.TabIndex = 17;
+            this.filterFirstName.Location = new System.Drawing.Point(66, 335);
+            this.filterFirstName.Name = "filterFirstName";
+            this.filterFirstName.Size = new System.Drawing.Size(73, 20);
+            this.filterFirstName.TabIndex = 17;
             // 
-            // textBoxSecondName
+            // filterSecondName
             // 
-            this.textBoxSecondName.Location = new System.Drawing.Point(145, 335);
-            this.textBoxSecondName.Name = "textBoxSecondName";
-            this.textBoxSecondName.Size = new System.Drawing.Size(92, 20);
-            this.textBoxSecondName.TabIndex = 18;
+            this.filterSecondName.Location = new System.Drawing.Point(145, 335);
+            this.filterSecondName.Name = "filterSecondName";
+            this.filterSecondName.Size = new System.Drawing.Size(92, 20);
+            this.filterSecondName.TabIndex = 18;
             // 
-            // textBoxDateOfBirth
+            // filterDateOfBirth
             // 
-            this.textBoxDateOfBirth.Location = new System.Drawing.Point(243, 335);
-            this.textBoxDateOfBirth.Name = "textBoxDateOfBirth";
-            this.textBoxDateOfBirth.Size = new System.Drawing.Size(86, 20);
-            this.textBoxDateOfBirth.TabIndex = 19;
+            this.filterDateOfBirth.Location = new System.Drawing.Point(243, 335);
+            this.filterDateOfBirth.Name = "filterDateOfBirth";
+            this.filterDateOfBirth.Size = new System.Drawing.Size(86, 20);
+            this.filterDateOfBirth.TabIndex = 19;
             // 
-            // textBoxPassCode
+            // filterPassCode
             // 
-            this.textBoxPassCode.Location = new System.Drawing.Point(335, 335);
-            this.textBoxPassCode.Name = "textBoxPassCode";
-            this.textBoxPassCode.Size = new System.Drawing.Size(91, 20);
-            this.textBoxPassCode.TabIndex = 20;
+            this.filterPassCode.Location = new System.Drawing.Point(335, 335);
+            this.filterPassCode.Name = "filterPassCode";
+            this.filterPassCode.Size = new System.Drawing.Size(91, 20);
+            this.filterPassCode.TabIndex = 20;
             // 
-            // textBoxCitizenship
+            // filterCitizenship
             // 
-            this.textBoxCitizenship.Location = new System.Drawing.Point(432, 335);
-            this.textBoxCitizenship.Name = "textBoxCitizenship";
-            this.textBoxCitizenship.Size = new System.Drawing.Size(72, 20);
-            this.textBoxCitizenship.TabIndex = 21;
+            this.filterCitizenship.Location = new System.Drawing.Point(432, 335);
+            this.filterCitizenship.Name = "filterCitizenship";
+            this.filterCitizenship.Size = new System.Drawing.Size(72, 20);
+            this.filterCitizenship.TabIndex = 21;
             // 
-            // textBoxLocation
+            // filterLocation
             // 
-            this.textBoxLocation.Location = new System.Drawing.Point(510, 335);
-            this.textBoxLocation.Name = "textBoxLocation";
-            this.textBoxLocation.Size = new System.Drawing.Size(72, 20);
-            this.textBoxLocation.TabIndex = 22;
+            this.filterLocation.Location = new System.Drawing.Point(510, 335);
+            this.filterLocation.Name = "filterLocation";
+            this.filterLocation.Size = new System.Drawing.Size(72, 20);
+            this.filterLocation.TabIndex = 22;
             // 
-            // textBoxSettlementDate
+            // filterSettlementDate
             // 
-            this.textBoxSettlementDate.Location = new System.Drawing.Point(588, 335);
-            this.textBoxSettlementDate.Name = "textBoxSettlementDate";
-            this.textBoxSettlementDate.Size = new System.Drawing.Size(100, 20);
-            this.textBoxSettlementDate.TabIndex = 23;
+            this.filterSettlementDate.Location = new System.Drawing.Point(588, 335);
+            this.filterSettlementDate.Name = "filterSettlementDate";
+            this.filterSettlementDate.Size = new System.Drawing.Size(100, 20);
+            this.filterSettlementDate.TabIndex = 23;
             // 
-            // textBoxDepartDate
+            // filterDepartDate
             // 
-            this.textBoxDepartDate.Location = new System.Drawing.Point(694, 336);
-            this.textBoxDepartDate.Name = "textBoxDepartDate";
-            this.textBoxDepartDate.Size = new System.Drawing.Size(102, 20);
-            this.textBoxDepartDate.TabIndex = 24;
+            this.filterDepartDate.Location = new System.Drawing.Point(694, 336);
+            this.filterDepartDate.Name = "filterDepartDate";
+            this.filterDepartDate.Size = new System.Drawing.Size(102, 20);
+            this.filterDepartDate.TabIndex = 24;
             // 
-            // textBoxPayMoney
+            // filterPayMoney
             // 
-            this.textBoxPayMoney.Location = new System.Drawing.Point(802, 335);
-            this.textBoxPayMoney.Name = "textBoxPayMoney";
-            this.textBoxPayMoney.Size = new System.Drawing.Size(97, 20);
-            this.textBoxPayMoney.TabIndex = 25;
+            this.filterPayMoney.Location = new System.Drawing.Point(802, 335);
+            this.filterPayMoney.Name = "filterPayMoney";
+            this.filterPayMoney.Size = new System.Drawing.Size(97, 20);
+            this.filterPayMoney.TabIndex = 25;
             // 
             // GuestsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(911, 365);
-            this.Controls.Add(this.textBoxPayMoney);
-            this.Controls.Add(this.textBoxDepartDate);
-            this.Controls.Add(this.textBoxSettlementDate);
-            this.Controls.Add(this.textBoxLocation);
-            this.Controls.Add(this.textBoxCitizenship);
-            this.Controls.Add(this.textBoxPassCode);
-            this.Controls.Add(this.textBoxDateOfBirth);
-            this.Controls.Add(this.textBoxSecondName);
-            this.Controls.Add(this.textBoxFirstName);
-            this.Controls.Add(this.textBoxId);
+            this.Controls.Add(this.filterPayMoney);
+            this.Controls.Add(this.filterDepartDate);
+            this.Controls.Add(this.filterSettlementDate);
+            this.Controls.Add(this.filterLocation);
+            this.Controls.Add(this.filterCitizenship);
+            this.Controls.Add(this.filterPassCode);
+            this.Controls.Add(this.filterDateOfBirth);
+            this.Controls.Add(this.filterSecondName);
+            this.Controls.Add(this.filterFirstName);
+            this.Controls.Add(this.filterId);
             this.Controls.Add(this.labelPayMoney);
             this.Controls.Add(this.labelDepartureDate);
             this.Controls.Add(this.labelSettlementDate);
@@ -317,15 +318,15 @@
         private System.Windows.Forms.Label labelSettlementDate;
         private System.Windows.Forms.Label labelDepartureDate;
         private System.Windows.Forms.Label labelPayMoney;
-        private System.Windows.Forms.TextBox textBoxId;
-        private System.Windows.Forms.TextBox textBoxFirstName;
-        private System.Windows.Forms.TextBox textBoxSecondName;
-        private System.Windows.Forms.TextBox textBoxDateOfBirth;
-        private System.Windows.Forms.TextBox textBoxPassCode;
-        private System.Windows.Forms.TextBox textBoxCitizenship;
-        private System.Windows.Forms.TextBox textBoxLocation;
-        private System.Windows.Forms.TextBox textBoxSettlementDate;
-        private System.Windows.Forms.TextBox textBoxDepartDate;
-        private System.Windows.Forms.TextBox textBoxPayMoney;
+        private System.Windows.Forms.TextBox filterId;
+        private System.Windows.Forms.TextBox filterFirstName;
+        private System.Windows.Forms.TextBox filterSecondName;
+        private System.Windows.Forms.TextBox filterDateOfBirth;
+        private System.Windows.Forms.TextBox filterPassCode;
+        private System.Windows.Forms.TextBox filterCitizenship;
+        private System.Windows.Forms.TextBox filterLocation;
+        private System.Windows.Forms.TextBox filterSettlementDate;
+        private System.Windows.Forms.TextBox filterDepartDate;
+        private System.Windows.Forms.TextBox filterPayMoney;
     }
 }

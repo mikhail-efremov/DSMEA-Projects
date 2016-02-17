@@ -2,13 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SQLite;
-using System.IO;
 using SimpleHotelApp.Actors;
 
 namespace SimpleHotelApp
@@ -137,6 +133,14 @@ namespace SimpleHotelApp
                     var bindingRooms = new BindingList<Guest>(rooms);
                     dataGridView1.DataSource = bindingRooms;
 
+                    var deleteButton = new DataGridViewButtonColumn();
+                    deleteButton.Name = "dataGridViewDeleteButton";
+                    deleteButton.HeaderText = "Room";
+                    deleteButton.Text = "Room";
+
+                    deleteButton.UseColumnTextForButtonValue = true;
+                    this.dataGridView1.Columns.Add(deleteButton);
+                    
                     if (ActiveRole == Role.Administrator)
                         dataGridView1.ReadOnly = false;
                     if (ActiveRole == Role.Customer)
@@ -147,7 +151,59 @@ namespace SimpleHotelApp
 
         private List<Guest> Filter(BindingList<Guest> bindingList)
         {
-            return (bindingList.Where(p => p.FirstName.Contains(""))).ToList();
+            var list = bindingList.ToList();
+
+            if(!String.IsNullOrWhiteSpace(filterId.Text))
+            {
+                list = list.Where(p => p.Id == Convert.ToInt32(filterId.Text)).ToList();
+            }
+            if (!String.IsNullOrWhiteSpace(filterFirstName.Text))
+            {
+                list = list.Where(p => p.FirstName.Contains(filterFirstName.Text)).ToList();
+            }
+            if (!String.IsNullOrWhiteSpace(filterSecondName.Text))
+            {
+                list = list.Where(p => p.SecondName.Contains(filterSecondName.Text)).ToList();
+            }
+            if (!String.IsNullOrWhiteSpace(filterDateOfBirth.Text))
+            {
+                list = list.Where(p => p.DateOfBirth == Convert.ToDateTime(filterDateOfBirth.Text)).ToList();
+            }
+            if (!String.IsNullOrWhiteSpace(filterPassCode.Text))
+            {
+                list = list.Where(p => p.PassportCode.Contains(filterPassCode.Text)).ToList();
+            }
+            if (!String.IsNullOrWhiteSpace(filterCitizenship.Text))
+            {
+                list = list.Where(p => p.Citizenship.Contains(filterCitizenship.Text)).ToList();
+            }
+            if (!String.IsNullOrWhiteSpace(filterLocation.Text))
+            {
+                list = list.Where(p => p.Location.Contains(filterLocation.Text)).ToList();
+            }
+            if (!String.IsNullOrWhiteSpace(filterSettlementDate.Text))
+            {
+                list = list.Where(p => p.SettlementDate == Convert.ToDateTime(filterSettlementDate.Text)).ToList();
+            }
+            if (!String.IsNullOrWhiteSpace(filterDepartDate.Text))
+            {
+                list = list.Where(p => p.DepartureDate == Convert.ToDateTime(filterDepartDate.Text)).ToList();
+            }
+            if (!String.IsNullOrWhiteSpace(filterPayMoney.Text))
+            {
+                list = list.Where(p => p.PayMoney == Convert.ToDecimal(filterPayMoney.Text)).ToList();
+            }
+            return list;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == 10)
+            {
+                var list = ((BindingList<Guest>)(dataGridView1.DataSource)).ToList();
+
+                var a = list[e.RowIndex];
+            }
         }
     }
 
