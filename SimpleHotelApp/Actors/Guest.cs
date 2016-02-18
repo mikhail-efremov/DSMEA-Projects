@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
+using Newtonsoft.Json;
+using System.ComponentModel;
 
 namespace SimpleHotelApp.Actors
 {
@@ -16,6 +18,7 @@ namespace SimpleHotelApp.Actors
         private DateTime? _settlementDate;
         private DateTime? _departureDate;
         private Decimal? _payMoney;
+        private List<String> _rooms;
 
         public Int32 Id
         {
@@ -67,6 +70,12 @@ namespace SimpleHotelApp.Actors
             get { return _payMoney; }
             set { _payMoney = value; }
         }
+//        [Browsable(false)]
+        public String Rooms
+        {
+            get { return JsonConvert.SerializeObject(_rooms); }
+            set { _rooms = (List<String>)JsonConvert.DeserializeObject(value);}
+        }
 
         public static Guest GetByID(Int32 Id)
         {
@@ -111,7 +120,6 @@ namespace SimpleHotelApp.Actors
             insertSQL.Parameters.Add(new SQLiteParameter("PassportCode", passportCode));
             insertSQL.Parameters.Add(new SQLiteParameter("Citizenhip", citizenship));
             insertSQL.Parameters.Add(new SQLiteParameter("Location", location));
-
             try
             {
                 insertSQL.ExecuteNonQuery();
@@ -142,7 +150,6 @@ namespace SimpleHotelApp.Actors
             insertSQL.Parameters.Add(new SQLiteParameter("citizenhip", Citizenship));
             insertSQL.Parameters.Add(new SQLiteParameter("location", Location));
             insertSQL.Parameters.Add(new SQLiteParameter("id", Id));
-
             try
             {
                 insertSQL.ExecuteNonQuery();

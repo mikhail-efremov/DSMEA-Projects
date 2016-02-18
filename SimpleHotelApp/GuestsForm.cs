@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Data.SQLite;
 using SimpleHotelApp.Actors;
+using Newtonsoft.Json;
 
 namespace SimpleHotelApp
 {
@@ -115,6 +116,7 @@ namespace SimpleHotelApp
                     SQLiteDataReader r = fmd.ExecuteReader();
 
                     var rooms = new List<Guest>();
+                    var deleteButton = new DataGridViewButtonColumn();
 
                     while (r.Read())
                     {
@@ -129,18 +131,28 @@ namespace SimpleHotelApp
                             r["SettlementDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(r["SettlementDate"]),
                             r["DepartureDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(r["DepartureDate"]),
                             r["PayMoney"] == DBNull.Value ? (Decimal?)null : Convert.ToDecimal(r["PayMoney"])));
+
+                        deleteButton.Name = "dataGridViewDeleteButton";
+                        deleteButton.HeaderText = "Rooms";
+                        deleteButton.Text = "Room";
+
+                        deleteButton.UseColumnTextForButtonValue = true;
                     }
                     var bindingRooms = new BindingList<Guest>(rooms);
                     dataGridView1.DataSource = bindingRooms;
 
-                    var deleteButton = new DataGridViewButtonColumn();
-                    deleteButton.Name = "dataGridViewDeleteButton";
-                    deleteButton.HeaderText = "Room";
-                    deleteButton.Text = "Room";
+                    for (int index = 0; index < dataGridView1.Rows.Count; index++)
+                    {
+                        DataGridViewRow dr = dataGridView1.Rows[index];
+                        {
+                            DataGridViewButtonCell buttonCell = new DataGridViewButtonCell();
+                            dr.Cells[10] = buttonCell;
+                        }
+                    }
 
-                    deleteButton.UseColumnTextForButtonValue = true;
-                    this.dataGridView1.Columns.Add(deleteButton);
-                    
+          //          this.dataGridView1.Columns.Add(deleteButton);
+
+
                     if (ActiveRole == Role.Administrator)
                         dataGridView1.ReadOnly = false;
                     if (ActiveRole == Role.Customer)
@@ -201,8 +213,8 @@ namespace SimpleHotelApp
             if (e.ColumnIndex == 10)
             {
                 var list = ((BindingList<Guest>)(dataGridView1.DataSource)).ToList();
-
                 var a = list[e.RowIndex];
+                MessageBox.Show(JsonConvert.SerializeObject(a, Formatting.Indented).Replace("\"", String.Empty));
             }
         }
     }

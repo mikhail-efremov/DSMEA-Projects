@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimpleHotelApp.Actors
 {
@@ -29,6 +26,7 @@ namespace SimpleHotelApp.Actors
             get { return _busy; }
             set { _busy = value; }
         }
+        
         public Guest Guest 
         {
             get {

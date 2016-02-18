@@ -54,7 +54,11 @@ namespace SimpleHotelApp
                     var bindingList = new BindingList<Room>(rooms);
                     var source = new BindingSource(bindingList, null);
                     dataGridView1.DataSource = source;
-
+                    var guestButton = new DataGridViewButtonColumn();
+                    guestButton.Name = "dataGridViewDeleteButton";
+                    guestButton.HeaderText = "Guests";
+                    guestButton.Text = "Guests";
+                    
                     if (ActiveRole == Role.Administrator)
                         dataGridView1.ReadOnly = false;
                     if (ActiveRole == Role.Customer)
