@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace SimpleHotelApp.Actors
@@ -8,7 +9,7 @@ namespace SimpleHotelApp.Actors
         private Int32 _id;
         private Int32 _number;
         private bool _busy;
-        private Guest _guest;
+        private String _guests;
         private Decimal _costPerDay;
 
         public Int32 ID
@@ -27,16 +28,16 @@ namespace SimpleHotelApp.Actors
             set { _busy = value; }
         }
         
-        public Guest Guest 
+        public String Guests 
         {
             get {
                 if (!Busy)
                 {
-                    return _guest;
+                    return _guests;
                 }
                 return null;
             }
-            set { _guest = value; }
+            set { _guests = value; }
         }
         public Decimal CostPerDay
         {
@@ -49,8 +50,19 @@ namespace SimpleHotelApp.Actors
             ID = id;
             Number = number;
             Busy = busy;
-            Guest = guest;
+            AddGuest(guest);
             CostPerDay = costPerDay;
+        }
+
+        public void AddGuest(Guest g)
+        {
+            if (g == null)
+                return;
+            if (g.IsEmpty())
+                return;
+            var a = JsonConvert.DeserializeObject<List<Guest>>(_guests);
+            a.Add(g);
+            _guests = JsonConvert.SerializeObject(a);
         }
     }
 }

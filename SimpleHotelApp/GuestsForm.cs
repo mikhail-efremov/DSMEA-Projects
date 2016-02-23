@@ -116,7 +116,6 @@ namespace SimpleHotelApp
                     SQLiteDataReader r = fmd.ExecuteReader();
 
                     var rooms = new List<Guest>();
-                    var deleteButton = new DataGridViewButtonColumn();
 
                     while (r.Read())
                     {
@@ -131,27 +130,11 @@ namespace SimpleHotelApp
                             r["SettlementDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(r["SettlementDate"]),
                             r["DepartureDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(r["DepartureDate"]),
                             r["PayMoney"] == DBNull.Value ? (Decimal?)null : Convert.ToDecimal(r["PayMoney"])));
-
-                        deleteButton.Name = "dataGridViewDeleteButton";
-                        deleteButton.HeaderText = "Rooms";
-                        deleteButton.Text = "Room";
-
-                        deleteButton.UseColumnTextForButtonValue = true;
                     }
                     var bindingRooms = new BindingList<Guest>(rooms);
                     dataGridView1.DataSource = bindingRooms;
 
-                    for (int index = 0; index < dataGridView1.Rows.Count; index++)
-                    {
-                        DataGridViewRow dr = dataGridView1.Rows[index];
-                        {
-                            DataGridViewButtonCell buttonCell = new DataGridViewButtonCell();
-                            dr.Cells[10] = buttonCell;
-                        }
-                    }
-
-          //          this.dataGridView1.Columns.Add(deleteButton);
-
+                    FillButtonsToTable();
 
                     if (ActiveRole == Role.Administrator)
                         dataGridView1.ReadOnly = false;
@@ -214,7 +197,25 @@ namespace SimpleHotelApp
             {
                 var list = ((BindingList<Guest>)(dataGridView1.DataSource)).ToList();
                 var a = list[e.RowIndex];
-                MessageBox.Show(JsonConvert.SerializeObject(a, Formatting.Indented).Replace("\"", String.Empty));
+
+                var guestForm = new RoomsAdderForm(_sqlConnection, ActiveRole, a);
+                guestForm.ShowDialog();
+            //    MessageBox.Show(JsonConvert.SerializeObject(a, Formatting.Indented).Replace("\"", String.Empty));
+            }
+        }
+
+        private void dataGridView1_Click(object sender, EventArgs e)
+        {
+            FillButtonsToTable();
+        }
+
+        private void FillButtonsToTable()
+        {
+            for (int index = 0; index < dataGridView1.Rows.Count - 1; index++)
+            {
+                var dr = dataGridView1.Rows[index];
+                var buttonCell = new DataGridViewButtonCell();
+                dr.Cells[10] = buttonCell;
             }
         }
     }

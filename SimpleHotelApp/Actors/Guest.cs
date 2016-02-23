@@ -190,5 +190,12 @@ namespace SimpleHotelApp.Actors
                 g.Update(connection);
             }
         }
+
+        public bool IsEmpty()
+        {
+            if (String.IsNullOrEmpty(FirstName) || String.IsNullOrEmpty(SecondName))
+                return true;
+            return false;
+        }
     }
 }
