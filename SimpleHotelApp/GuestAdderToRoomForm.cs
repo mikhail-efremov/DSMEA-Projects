@@ -18,6 +18,8 @@ namespace SimpleHotelApp
         private Role _activeRole;
         private Guest _guest;
 
+        private BindingList<Room> _currentRoomsList;
+
         public GuestAdderToRoomForm(SQLiteConnection connection, Role activeRole, Guest guest)
         {
             InitializeComponent();
@@ -37,28 +39,9 @@ namespace SimpleHotelApp
         {
             if (e.ColumnIndex == 3)
             {
-                //              var list = ((BindingList<Room>)(dataGridView1.DataSource)).ToList();
-                //          var bList = (dataGridView1.DataSource);
-                //        var b = (BindingList<Room>)bList;
-                List<Room> products;
-                List<Object> products1;
-                var bindSourse = dataGridView1.DataSource;
-                var a = new BindingSource(dataGridView1.DataSource, null);
-                var list = (BindingList<object>)a.DataSource;
+                var bRoom = _currentRoomsList[e.RowIndex];
+                bRoom.AddGuest(_guest);
                 
-                try { products = (List<Room>)dataGridView1.DataSource; }
-                catch { }
-
-                try
-                {
-                    products1 = ((List<Room>)dataGridView1.DataSource).Cast<object>().ToList();
-                }
-                catch { }
-                
-                //          var bRoom = bList[e.RowIndex];
-                //               var room = list[e.RowIndex];
-                //              room.AddGuest(_guest);
-
                 LoadRooms();
             }
         }
@@ -85,8 +68,8 @@ namespace SimpleHotelApp
                             Convert.ToDecimal(r["CostPerDay"])));
                     }
 
-                    var bindingList = new BindingList<Room>(rooms);
-                    var source = new BindingSource(bindingList, null);
+                    _currentRoomsList = new BindingList<Room>(rooms);
+                    var source = new BindingSource(_currentRoomsList, null);
                     dataGridView1.DataSource = source;
                     var guestButton = new DataGridViewButtonColumn();
                     guestButton.Name = "dataGridViewDeleteButton";

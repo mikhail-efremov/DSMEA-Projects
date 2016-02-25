@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 
 namespace SimpleHotelApp.Actors
 {
@@ -60,9 +61,58 @@ namespace SimpleHotelApp.Actors
                 return;
             if (g.IsEmpty())
                 return;
+            if (_guests == null)
+                _guests = String.Empty;
             var a = JsonConvert.DeserializeObject<List<Guest>>(_guests);
+            if (a == null)
+                a = new List<Guest>();
             a.Add(g);
             _guests = JsonConvert.SerializeObject(a);
+        }
+
+        public static void FullUpdateTable(SQLiteConnection connection, List<Room> list)
+        {
+            var clearComand = "DELETE FROM tblRooms;";
+
+            var sqlCommand = new SQLiteCommand(clearComand, connection);
+            sqlCommand.ExecuteNonQuery();
+
+            foreach (var r in list)
+            {
+                Room.Create(connection, r);
+            }
+        }
+
+        public static Guest Create(SQLiteConnection connection, Room room)
+        {
+            return Create(connection, room.Number, room.Busy, room.Guests, room.CostPerDay);
+        }
+
+        public static Guest Create(SQLiteConnection connection, int number, bool busy,
+            string guests, decimal costPerDay)
+        {
+            SQLiteCommand insertSQL = new SQLiteCommand(
+                "INSERT INTO tblRooms " +
+                "(Id, Number, Busy, GuestId, CostPerDay) " +
+                "VALUES (?,?,?,?,?);", connection
+                );
+            insertSQL.Parameters.Add(new SQLiteParameter("Id", null));
+            insertSQL.Parameters.Add(new SQLiteParameter("Number", number));
+            insertSQL.Parameters.Add(new SQLiteParameter("Busy", busy));
+            insertSQL.Parameters.Add(new SQLiteParameter("GuestId", guests));
+            insertSQL.Parameters.Add(new SQLiteParameter("CostPerDay", costPerDay));
+            try
+            {
+                insertSQL.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+            }
+            return new Guest();
         }
     }
 }
