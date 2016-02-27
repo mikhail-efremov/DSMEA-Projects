@@ -2,11 +2,9 @@
 Application for Donbas State Mechanical Engineering Academy
 
 
-# Roles:
-login:God
-pass:1
-role:Administrator
+# Roles
 
-login:Holop
-pass:1
-role:Customer
+| Role  | Login | Password |
+| ------------- | ------------- | ------------- |
+| Administrator  | God  | 1  |
+| Customer  | User  | 1  |
