@@ -25,6 +25,7 @@ namespace SimpleHotelApp
             InitializeComponent();
             _connection = connection;
             _activeRole = activeRole;
+            labelActiveRole.Text = _activeRole.ToString();
             _guest = guest;
         }
 
@@ -39,10 +40,13 @@ namespace SimpleHotelApp
         {
             if (e.ColumnIndex == 3)
             {
-                var bRoom = _currentRoomsList[e.RowIndex];
-                bRoom.AddGuest(_guest);
-                
-                LoadRooms();
+                if (_activeRole == Role.Administrator)
+                {
+                    var bRoom = _currentRoomsList[e.RowIndex];
+                    bRoom.AddGuest(Convert.ToString(_guest.Id));
+
+                    Room.FullUpdateTable(_connection, _currentRoomsList.ToList());
+                }
             }
         }
 
@@ -64,7 +68,7 @@ namespace SimpleHotelApp
                     {
                         rooms.Add(new Room(Convert.ToInt32(r["Id"]), Convert.ToInt32(r["Number"]),
                             Convert.ToBoolean(Convert.ToInt32(r["Busy"]) == 1),
-                            Guest.GetByID(Convert.ToInt32(Convert.ToString(r["GuestId"]) == String.Empty ? 0 : r["GuestId"])),
+                            Convert.ToString(Convert.ToString(r["GuestId"]) == String.Empty ? 0 : r["GuestId"]),
                             Convert.ToDecimal(r["CostPerDay"])));
                     }
 
@@ -88,6 +92,8 @@ namespace SimpleHotelApp
                 var dr = dataGridView1.Rows[index];
                 var buttonCell = new DataGridViewButtonCell();
                 dr.Cells[3] = buttonCell;
+                var buttonCell1 = new DataGridViewButtonCell();
+                dr.Cells[5] = buttonCell1;
             }
         }
     }

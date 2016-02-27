@@ -30,6 +30,8 @@
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
+            this.labelActiveRole = new System.Windows.Forms.Label();
+            this.infoLabelActiveRole = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,10 +44,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 25);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(512, 149);
+            this.dataGridView1.Size = new System.Drawing.Size(512, 136);
             this.dataGridView1.TabIndex = 1;
             // 
             // button1
@@ -59,17 +61,38 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // labelActiveRole
+            // 
+            this.labelActiveRole.AutoSize = true;
+            this.labelActiveRole.Location = new System.Drawing.Point(80, 9);
+            this.labelActiveRole.Name = "labelActiveRole";
+            this.labelActiveRole.Size = new System.Drawing.Size(81, 13);
+            this.labelActiveRole.TabIndex = 10;
+            this.labelActiveRole.Text = "labelActiveRole";
+            // 
+            // infoLabelActiveRole
+            // 
+            this.infoLabelActiveRole.AutoSize = true;
+            this.infoLabelActiveRole.Location = new System.Drawing.Point(9, 9);
+            this.infoLabelActiveRole.Name = "infoLabelActiveRole";
+            this.infoLabelActiveRole.Size = new System.Drawing.Size(65, 13);
+            this.infoLabelActiveRole.TabIndex = 9;
+            this.infoLabelActiveRole.Text = "Active Role:";
+            // 
             // RoomsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(534, 202);
+            this.Controls.Add(this.labelActiveRole);
+            this.Controls.Add(this.infoLabelActiveRole);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridView1);
             this.Name = "RoomsForm";
             this.Text = "RoomsForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -77,5 +100,7 @@
 
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label labelActiveRole;
+        private System.Windows.Forms.Label infoLabelActiveRole;
     }
 }

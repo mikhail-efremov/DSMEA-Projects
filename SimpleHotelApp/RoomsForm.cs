@@ -21,6 +21,7 @@ namespace SimpleHotelApp
         {
             InitializeComponent();
             ActiveRole = activeRole;
+            labelActiveRole.Text = ActiveRole.ToString();
 
             if (ActiveRole == Role.Customer || ActiveRole == Role.Default)
             {
@@ -47,7 +48,7 @@ namespace SimpleHotelApp
                     {
                         rooms.Add(new Room(Convert.ToInt32(r["Id"]), Convert.ToInt32(r["Number"]),
                             Convert.ToBoolean(Convert.ToInt32(r["Busy"]) == 1),
-                            Guest.GetByID(Convert.ToInt32(Convert.ToString(r["GuestId"]) == String.Empty ? 0 : r["GuestId"])),
+                            Convert.ToString(Convert.ToString(r["GuestId"]) == String.Empty ? 0 : r["GuestId"]),
                             Convert.ToDecimal(r["CostPerDay"])));
                     }
 

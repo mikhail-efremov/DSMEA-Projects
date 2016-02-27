@@ -52,6 +52,8 @@
             this.filterSettlementDate = new System.Windows.Forms.TextBox();
             this.filterDepartDate = new System.Windows.Forms.TextBox();
             this.filterPayMoney = new System.Windows.Forms.TextBox();
+            this.labelActiveRole = new System.Windows.Forms.Label();
+            this.infoLabelActiveRole = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,10 +66,10 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 24);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.Size = new System.Drawing.Size(887, 266);
+            this.dataGridView1.Size = new System.Drawing.Size(887, 254);
             this.dataGridView1.TabIndex = 0;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             this.dataGridView1.Click += new System.EventHandler(this.dataGridView1_Click);
@@ -107,6 +109,7 @@
             // 
             // labelId
             // 
+            this.labelId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelId.AutoSize = true;
             this.labelId.Location = new System.Drawing.Point(12, 319);
             this.labelId.Name = "labelId";
@@ -116,6 +119,7 @@
             // 
             // labelFirstName
             // 
+            this.labelFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelFirstName.AutoSize = true;
             this.labelFirstName.Location = new System.Drawing.Point(63, 319);
             this.labelFirstName.Name = "labelFirstName";
@@ -125,6 +129,7 @@
             // 
             // labelSecondName
             // 
+            this.labelSecondName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelSecondName.AutoSize = true;
             this.labelSecondName.Location = new System.Drawing.Point(142, 319);
             this.labelSecondName.Name = "labelSecondName";
@@ -134,6 +139,7 @@
             // 
             // labelDateOfBirth
             // 
+            this.labelDateOfBirth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelDateOfBirth.AutoSize = true;
             this.labelDateOfBirth.Location = new System.Drawing.Point(240, 319);
             this.labelDateOfBirth.Name = "labelDateOfBirth";
@@ -143,6 +149,7 @@
             // 
             // labelPassportCode
             // 
+            this.labelPassportCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelPassportCode.AutoSize = true;
             this.labelPassportCode.Location = new System.Drawing.Point(332, 319);
             this.labelPassportCode.Name = "labelPassportCode";
@@ -152,6 +159,7 @@
             // 
             // labelCitizenship
             // 
+            this.labelCitizenship.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelCitizenship.AutoSize = true;
             this.labelCitizenship.Location = new System.Drawing.Point(429, 319);
             this.labelCitizenship.Name = "labelCitizenship";
@@ -161,6 +169,7 @@
             // 
             // labelLocation
             // 
+            this.labelLocation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelLocation.AutoSize = true;
             this.labelLocation.Location = new System.Drawing.Point(507, 319);
             this.labelLocation.Name = "labelLocation";
@@ -170,6 +179,7 @@
             // 
             // labelSettlementDate
             // 
+            this.labelSettlementDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelSettlementDate.AutoSize = true;
             this.labelSettlementDate.Location = new System.Drawing.Point(585, 319);
             this.labelSettlementDate.Name = "labelSettlementDate";
@@ -179,6 +189,7 @@
             // 
             // labelDepartureDate
             // 
+            this.labelDepartureDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelDepartureDate.AutoSize = true;
             this.labelDepartureDate.Location = new System.Drawing.Point(691, 319);
             this.labelDepartureDate.Name = "labelDepartureDate";
@@ -188,6 +199,7 @@
             // 
             // labelPayMoney
             // 
+            this.labelPayMoney.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelPayMoney.AutoSize = true;
             this.labelPayMoney.Location = new System.Drawing.Point(799, 319);
             this.labelPayMoney.Name = "labelPayMoney";
@@ -197,6 +209,7 @@
             // 
             // filterId
             // 
+            this.filterId.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.filterId.Location = new System.Drawing.Point(15, 336);
             this.filterId.Name = "filterId";
             this.filterId.Size = new System.Drawing.Size(45, 20);
@@ -204,6 +217,7 @@
             // 
             // filterFirstName
             // 
+            this.filterFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.filterFirstName.Location = new System.Drawing.Point(66, 335);
             this.filterFirstName.Name = "filterFirstName";
             this.filterFirstName.Size = new System.Drawing.Size(73, 20);
@@ -211,6 +225,7 @@
             // 
             // filterSecondName
             // 
+            this.filterSecondName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.filterSecondName.Location = new System.Drawing.Point(145, 335);
             this.filterSecondName.Name = "filterSecondName";
             this.filterSecondName.Size = new System.Drawing.Size(92, 20);
@@ -218,6 +233,7 @@
             // 
             // filterDateOfBirth
             // 
+            this.filterDateOfBirth.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.filterDateOfBirth.Location = new System.Drawing.Point(243, 335);
             this.filterDateOfBirth.Name = "filterDateOfBirth";
             this.filterDateOfBirth.Size = new System.Drawing.Size(86, 20);
@@ -225,6 +241,7 @@
             // 
             // filterPassCode
             // 
+            this.filterPassCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.filterPassCode.Location = new System.Drawing.Point(335, 335);
             this.filterPassCode.Name = "filterPassCode";
             this.filterPassCode.Size = new System.Drawing.Size(91, 20);
@@ -232,6 +249,7 @@
             // 
             // filterCitizenship
             // 
+            this.filterCitizenship.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.filterCitizenship.Location = new System.Drawing.Point(432, 335);
             this.filterCitizenship.Name = "filterCitizenship";
             this.filterCitizenship.Size = new System.Drawing.Size(72, 20);
@@ -239,6 +257,7 @@
             // 
             // filterLocation
             // 
+            this.filterLocation.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.filterLocation.Location = new System.Drawing.Point(510, 335);
             this.filterLocation.Name = "filterLocation";
             this.filterLocation.Size = new System.Drawing.Size(72, 20);
@@ -246,6 +265,7 @@
             // 
             // filterSettlementDate
             // 
+            this.filterSettlementDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.filterSettlementDate.Location = new System.Drawing.Point(588, 335);
             this.filterSettlementDate.Name = "filterSettlementDate";
             this.filterSettlementDate.Size = new System.Drawing.Size(100, 20);
@@ -253,6 +273,7 @@
             // 
             // filterDepartDate
             // 
+            this.filterDepartDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.filterDepartDate.Location = new System.Drawing.Point(694, 336);
             this.filterDepartDate.Name = "filterDepartDate";
             this.filterDepartDate.Size = new System.Drawing.Size(102, 20);
@@ -260,16 +281,37 @@
             // 
             // filterPayMoney
             // 
+            this.filterPayMoney.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.filterPayMoney.Location = new System.Drawing.Point(802, 335);
             this.filterPayMoney.Name = "filterPayMoney";
             this.filterPayMoney.Size = new System.Drawing.Size(97, 20);
             this.filterPayMoney.TabIndex = 25;
+            // 
+            // labelActiveRole
+            // 
+            this.labelActiveRole.AutoSize = true;
+            this.labelActiveRole.Location = new System.Drawing.Point(83, 9);
+            this.labelActiveRole.Name = "labelActiveRole";
+            this.labelActiveRole.Size = new System.Drawing.Size(81, 13);
+            this.labelActiveRole.TabIndex = 27;
+            this.labelActiveRole.Text = "labelActiveRole";
+            // 
+            // infoLabelActiveRole
+            // 
+            this.infoLabelActiveRole.AutoSize = true;
+            this.infoLabelActiveRole.Location = new System.Drawing.Point(12, 9);
+            this.infoLabelActiveRole.Name = "infoLabelActiveRole";
+            this.infoLabelActiveRole.Size = new System.Drawing.Size(65, 13);
+            this.infoLabelActiveRole.TabIndex = 26;
+            this.infoLabelActiveRole.Text = "Active Role:";
             // 
             // GuestsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(911, 365);
+            this.Controls.Add(this.labelActiveRole);
+            this.Controls.Add(this.infoLabelActiveRole);
             this.Controls.Add(this.filterPayMoney);
             this.Controls.Add(this.filterDepartDate);
             this.Controls.Add(this.filterSettlementDate);
@@ -329,5 +371,7 @@
         private System.Windows.Forms.TextBox filterSettlementDate;
         private System.Windows.Forms.TextBox filterDepartDate;
         private System.Windows.Forms.TextBox filterPayMoney;
+        private System.Windows.Forms.Label labelActiveRole;
+        private System.Windows.Forms.Label infoLabelActiveRole;
     }
 }

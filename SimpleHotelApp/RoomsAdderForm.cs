@@ -18,6 +18,7 @@ namespace SimpleHotelApp
             InitializeComponent();
             _connection = connection;
             _activeRole = activeRole;
+            labelActiveRole.Text = activeRole.ToString();
             _guest = guest;
             FillJsonLabel();
         }

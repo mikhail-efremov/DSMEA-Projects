@@ -32,6 +32,8 @@
             this.currentRoomTextBox = new System.Windows.Forms.TextBox();
             this.changeRoomButton = new System.Windows.Forms.Button();
             this.guestJsonLabel = new System.Windows.Forms.Label();
+            this.labelActiveRole = new System.Windows.Forms.Label();
+            this.infoLabelActiveRole = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -64,17 +66,37 @@
             // guestJsonLabel
             // 
             this.guestJsonLabel.AutoSize = true;
-            this.guestJsonLabel.Location = new System.Drawing.Point(82, 9);
+            this.guestJsonLabel.Location = new System.Drawing.Point(81, 31);
             this.guestJsonLabel.Name = "guestJsonLabel";
             this.guestJsonLabel.Size = new System.Drawing.Size(35, 13);
             this.guestJsonLabel.TabIndex = 3;
             this.guestJsonLabel.Text = "empty";
+            // 
+            // labelActiveRole
+            // 
+            this.labelActiveRole.AutoSize = true;
+            this.labelActiveRole.Location = new System.Drawing.Point(80, 9);
+            this.labelActiveRole.Name = "labelActiveRole";
+            this.labelActiveRole.Size = new System.Drawing.Size(81, 13);
+            this.labelActiveRole.TabIndex = 8;
+            this.labelActiveRole.Text = "labelActiveRole";
+            // 
+            // infoLabelActiveRole
+            // 
+            this.infoLabelActiveRole.AutoSize = true;
+            this.infoLabelActiveRole.Location = new System.Drawing.Point(9, 9);
+            this.infoLabelActiveRole.Name = "infoLabelActiveRole";
+            this.infoLabelActiveRole.Size = new System.Drawing.Size(65, 13);
+            this.infoLabelActiveRole.TabIndex = 7;
+            this.infoLabelActiveRole.Text = "Active Role:";
             // 
             // RoomsAdderForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(416, 345);
+            this.Controls.Add(this.labelActiveRole);
+            this.Controls.Add(this.infoLabelActiveRole);
             this.Controls.Add(this.guestJsonLabel);
             this.Controls.Add(this.changeRoomButton);
             this.Controls.Add(this.currentRoomTextBox);
@@ -92,5 +114,7 @@
         private System.Windows.Forms.TextBox currentRoomTextBox;
         private System.Windows.Forms.Button changeRoomButton;
         private System.Windows.Forms.Label guestJsonLabel;
+        private System.Windows.Forms.Label labelActiveRole;
+        private System.Windows.Forms.Label infoLabelActiveRole;
     }
 }

@@ -32,13 +32,18 @@ namespace SimpleHotelApp.Actors
         public String Guests 
         {
             get {
-                if (!Busy)
+                if (Busy)
                 {
                     return _guests;
                 }
                 return null;
             }
-            set { _guests = value; }
+            set
+            {
+                if (!String.IsNullOrEmpty(value))
+                    Busy = true;
+                _guests = value;
+            }
         }
         public Decimal CostPerDay
         {
@@ -46,28 +51,50 @@ namespace SimpleHotelApp.Actors
             set { _costPerDay = value; }
         }
 
-        public Room(Int32 id, Int32 number, Boolean busy, Guest guest, Decimal costPerDay)
+        public Room(Int32 id, Int32 number, Boolean busy, String guests, Decimal costPerDay)
         {
             ID = id;
             Number = number;
             Busy = busy;
-            AddGuest(guest);
+            AddGuests(guests);
             CostPerDay = costPerDay;
         }
 
-        public void AddGuest(Guest g)
+        public void AddGuests(String g)
         {
-            if (g == null)
-                return;
-            if (g.IsEmpty())
-                return;
-            if (_guests == null)
-                _guests = String.Empty;
-            var a = JsonConvert.DeserializeObject<List<Guest>>(_guests);
-            if (a == null)
-                a = new List<Guest>();
-            a.Add(g);
-            _guests = JsonConvert.SerializeObject(a);
+            try
+            {
+                if (g == null)
+                    return;
+                if (_guests == null)
+                    _guests = String.Empty;
+                var glist = JsonConvert.DeserializeObject<List<int>>(g);
+                var a = JsonConvert.DeserializeObject<List<int>>(_guests);
+                if (a == null)
+                    a = new List<int>();
+                a.AddRange(glist);
+                Guests = JsonConvert.SerializeObject(a);
+            }
+            catch
+            { }
+        }
+
+        public void AddGuest(String g)
+        {
+            try
+            {
+                if (g == null)
+                    return;
+                if (_guests == null)
+                    _guests = String.Empty;
+                var a = JsonConvert.DeserializeObject<List<int>>(_guests);
+                if (a == null)
+                    a = new List<int>();
+                a.Add(Convert.ToInt32(g));
+                Guests = JsonConvert.SerializeObject(a);
+            }
+            catch
+            { }
         }
 
         public static void FullUpdateTable(SQLiteConnection connection, List<Room> list)
@@ -85,22 +112,16 @@ namespace SimpleHotelApp.Actors
 
         public static Guest Create(SQLiteConnection connection, Room room)
         {
-            return Create(connection, room.Number, room.Busy, room.Guests, room.CostPerDay);
-        }
-
-        public static Guest Create(SQLiteConnection connection, int number, bool busy,
-            string guests, decimal costPerDay)
-        {
             SQLiteCommand insertSQL = new SQLiteCommand(
                 "INSERT INTO tblRooms " +
                 "(Id, Number, Busy, GuestId, CostPerDay) " +
                 "VALUES (?,?,?,?,?);", connection
                 );
-            insertSQL.Parameters.Add(new SQLiteParameter("Id", null));
-            insertSQL.Parameters.Add(new SQLiteParameter("Number", number));
-            insertSQL.Parameters.Add(new SQLiteParameter("Busy", busy));
-            insertSQL.Parameters.Add(new SQLiteParameter("GuestId", guests));
-            insertSQL.Parameters.Add(new SQLiteParameter("CostPerDay", costPerDay));
+            insertSQL.Parameters.Add(new SQLiteParameter("Id", room.ID));
+            insertSQL.Parameters.Add(new SQLiteParameter("Number", room.Number));
+            insertSQL.Parameters.Add(new SQLiteParameter("Busy", room.Busy));
+            insertSQL.Parameters.Add(new SQLiteParameter("GuestId", room.Guests));
+            insertSQL.Parameters.Add(new SQLiteParameter("CostPerDay", room.CostPerDay));
             try
             {
                 insertSQL.ExecuteNonQuery();

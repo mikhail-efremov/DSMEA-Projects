@@ -29,17 +29,18 @@ namespace SimpleHotelApp
         }
         
         private WorkingStatus _activeStatus;
-        private Role ActiveRole;
-        private SQLiteConnection _sqlConnection;
+        private Role _activeRole;
+        private SQLiteConnection _connection;
 
         public GuestsForm(SQLiteConnection connection, Role activeRole)
         {
             InitializeComponent();
-            _sqlConnection = connection;
-            ActiveRole = activeRole;
+            _connection = connection;
+            _activeRole = activeRole;
             ActiveStatus = WorkingStatus.Normal;
+            labelActiveRole.Text = _activeRole.ToString();
 
-            if (ActiveRole == Role.Customer || ActiveRole == Role.Default)
+            if (_activeRole == Role.Customer || _activeRole == Role.Default)
             {
                 dataGridView1.AllowUserToAddRows = false;
                 dataGridView1.ReadOnly = true;
@@ -48,7 +49,7 @@ namespace SimpleHotelApp
 
         private void buttonAddGuest_Click(object sender, EventArgs e)
         {
-            var myObject = Utils.GuestFillForm.ShowAndReturnObject(_sqlConnection);
+            var myObject = Utils.GuestFillForm.ShowAndReturnObject(_connection);
         }
 
         private void buttonSaveDB_Click(object sender, EventArgs e)
@@ -60,10 +61,10 @@ namespace SimpleHotelApp
         public void SaveInDataBase(List<Guest> guestsList)
         {
             if (ActiveStatus == WorkingStatus.Searching)
-                Guest.UpdateTableGuests(_sqlConnection, guestsList);
+                Guest.UpdateTableGuests(_connection, guestsList);
             else
             if (ActiveStatus == WorkingStatus.Normal)
-                Guest.FullUpdateTable(_sqlConnection, guestsList);
+                Guest.FullUpdateTable(_connection, guestsList);
         }
 
         private void GuestsForm_Load(object sender, EventArgs e)
@@ -136,10 +137,16 @@ namespace SimpleHotelApp
 
                     FillButtonsToTable();
 
-                    if (ActiveRole == Role.Administrator)
+                    if (_activeRole == Role.Administrator)
+                    {
                         dataGridView1.ReadOnly = false;
-                    if (ActiveRole == Role.Customer)
+                        dataGridView1.AllowUserToAddRows = true;
+                    }
+                    if (_activeRole == Role.Customer)
+                    {
                         dataGridView1.ReadOnly = true;
+                        dataGridView1.AllowUserToAddRows = false;
+                    }
                 }
             }
         }
@@ -198,9 +205,11 @@ namespace SimpleHotelApp
                 var list = ((BindingList<Guest>)(dataGridView1.DataSource)).ToList();
                 var a = list[e.RowIndex];
 
-                var guestForm = new RoomsAdderForm(_sqlConnection, ActiveRole, a);
-                guestForm.ShowDialog();
-            //    MessageBox.Show(JsonConvert.SerializeObject(a, Formatting.Indented).Replace("\"", String.Empty));
+                var guestAddederToRoomForm = new GuestAdderToRoomForm(_connection, _activeRole, a);
+                guestAddederToRoomForm.ShowDialog();
+                //    var guestForm = new RoomsAdderForm(_sqlConnection, ActiveRole, a);
+                //    guestForm.ShowDialog();
+                //    MessageBox.Show(JsonConvert.SerializeObject(a, Formatting.Indented).Replace("\"", String.Empty));
             }
         }
 

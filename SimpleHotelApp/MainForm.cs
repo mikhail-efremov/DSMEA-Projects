@@ -23,6 +23,7 @@ namespace SimpleHotelApp
             InitializeComponent();
             _sqlConnection = connection;
             ActiveRole = activeRole;
+            labelActiveRole.Text = ActiveRole.ToString();
         }
         
         private void button1_Click(object sender, EventArgs e)
@@ -55,18 +56,14 @@ namespace SimpleHotelApp
                     {
                         rooms.Add(new Room(Convert.ToInt32(r["Id"]), Convert.ToInt32(r["Number"]),
                             Convert.ToBoolean(Convert.ToInt32(r["Busy"]) == 1),
-                            Guest.GetByID(Convert.ToInt32(Convert.ToString(r["GuestId"]) == String.Empty ? 0 : r["GuestId"])),
+                            Convert.ToString(Convert.ToString(r["GuestId"]) == String.Empty ? 0 : r["GuestId"]),
                             Convert.ToDecimal(r["CostPerDay"])));
                     }
 
                     var bindingList = new BindingList<Room>(rooms);
                     var source = new BindingSource(bindingList, null);
                     dataGridView1.DataSource = source;
-
-                    if (ActiveRole == Role.Administrator)
-                        dataGridView1.ReadOnly = false;
-                    if (ActiveRole == Role.Customer)
-                        dataGridView1.ReadOnly = true;
+                    dataGridView1.ReadOnly = true;
                 }
             }
         }
