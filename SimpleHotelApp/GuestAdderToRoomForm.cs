@@ -43,7 +43,7 @@ namespace SimpleHotelApp
                 if (_activeRole == Role.Administrator)
                 {
                     var bRoom = _currentRoomsList[e.RowIndex];
-                    bRoom.AddGuest(Convert.ToString(_guest.Id));
+                    bRoom.AddGuest(_currentRoomsList.ToList(), e.RowIndex, Convert.ToString(_guest.Id));
 
                     Room.FullUpdateTable(_connection, _currentRoomsList.ToList());
                 }
@@ -79,11 +79,7 @@ namespace SimpleHotelApp
                     guestButton.Name = "dataGridViewDeleteButton";
                     guestButton.HeaderText = "Guests";
                     guestButton.Text = "Guests";
-
-                    if (ActiveRole == Role.Administrator)
-                        dataGridView1.ReadOnly = false;
-                    if (ActiveRole == Role.Customer)
-                        dataGridView1.ReadOnly = true;
+                    dataGridView1.ReadOnly = true;
                 }
             }
 

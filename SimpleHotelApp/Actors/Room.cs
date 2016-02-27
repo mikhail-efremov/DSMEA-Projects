@@ -79,7 +79,7 @@ namespace SimpleHotelApp.Actors
             { }
         }
 
-        public void AddGuest(String g)
+        public void AddGuest(List<Room> list, int index, String g)
         {
             try
             {
@@ -87,11 +87,24 @@ namespace SimpleHotelApp.Actors
                     return;
                 if (_guests == null)
                     _guests = String.Empty;
-                var a = JsonConvert.DeserializeObject<List<int>>(_guests);
-                if (a == null)
-                    a = new List<int>();
-                a.Add(Convert.ToInt32(g));
-                Guests = JsonConvert.SerializeObject(a);
+
+                int fResult = 0;
+                var rResult = list[index];
+                foreach (var room in list)
+                {
+                    var a = JsonConvert.DeserializeObject<List<int>>(room.Guests);
+                    if (a == null)
+                        a = new List<int>();
+                    fResult = a.Find(x => x == Convert.ToInt32(g));
+                    if (fResult != 0)
+                    {
+                        return;
+                    }
+                }
+                var rGuests = JsonConvert.DeserializeObject<List<int>>(rResult.Guests);
+                rGuests.Add(Convert.ToInt32(g));
+
+                Guests = JsonConvert.SerializeObject(rGuests);
             }
             catch
             { }

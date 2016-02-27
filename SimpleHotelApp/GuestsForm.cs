@@ -87,23 +87,6 @@ namespace SimpleHotelApp
             LoadFullGuestList();
         }
 
-        private DataTable ConvertToDataTable<T>(IList<T> data)
-        {
-            PropertyDescriptorCollection properties =
-               TypeDescriptor.GetProperties(typeof(T));
-            DataTable table = new DataTable();
-            foreach (PropertyDescriptor prop in properties)
-                table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
-            foreach (T item in data)
-            {
-                DataRow row = table.NewRow();
-                foreach (PropertyDescriptor prop in properties)
-                    row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
-                table.Rows.Add(row);
-            }
-            return table;
-        }
-
         private void LoadFullGuestList()
         {
             using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=DataBase.db"))
@@ -209,7 +192,6 @@ namespace SimpleHotelApp
                 guestAddederToRoomForm.ShowDialog();
                 //    var guestForm = new RoomsAdderForm(_sqlConnection, ActiveRole, a);
                 //    guestForm.ShowDialog();
-                //    MessageBox.Show(JsonConvert.SerializeObject(a, Formatting.Indented).Replace("\"", String.Empty));
             }
         }
 
@@ -225,6 +207,15 @@ namespace SimpleHotelApp
                 var dr = dataGridView1.Rows[index];
                 var buttonCell = new DataGridViewButtonCell();
                 dr.Cells[10] = buttonCell;
+            }
+        }
+
+        private void dataGridView1_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            var list = ((BindingList<Guest>)(dataGridView1.DataSource)).ToList();
+            for (int i = 0; i < list.Count; i++)
+            {
+                list[i].Id = i + 1;
             }
         }
     }
