@@ -339,6 +339,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "GuestsForm";
             this.Text = "GuestsForm";
+            this.Activated += new System.EventHandler(this.GuestsForm_Activated);
             this.Load += new System.EventHandler(this.GuestsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);

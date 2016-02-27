@@ -38,15 +38,22 @@ namespace SimpleHotelApp
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (_activeRole != Role.Administrator)
+                return;
+
             if (e.ColumnIndex == 3)
             {
-                if (_activeRole == Role.Administrator)
-                {
-                    var bRoom = _currentRoomsList[e.RowIndex];
-                    bRoom.AddGuest(_currentRoomsList.ToList(), e.RowIndex, Convert.ToString(_guest.Id));
+                var bRoom = _currentRoomsList[e.RowIndex];
+                bRoom.AddGuest(_currentRoomsList.ToList(), e.RowIndex, Convert.ToString(_guest.Id));
 
-                    Room.FullUpdateTable(_connection, _currentRoomsList.ToList());
-                }
+                Room.FullUpdateTable(_connection, _currentRoomsList.ToList());
+            }
+            else if (e.ColumnIndex == 5)
+            {
+                var bRoom = _currentRoomsList[e.RowIndex];
+                bRoom.Guests = String.Empty;
+
+                Room.FullUpdateTable(_connection, _currentRoomsList.ToList());
             }
         }
 
@@ -82,7 +89,7 @@ namespace SimpleHotelApp
                     dataGridView1.ReadOnly = true;
                 }
             }
-
+            dataGridView1.Columns.Add("Clear", "Clear");
             for (int index = 0; index < dataGridView1.Rows.Count; index++)
             {
                 var dr = dataGridView1.Rows[index];
@@ -90,6 +97,7 @@ namespace SimpleHotelApp
                 dr.Cells[3] = buttonCell;
                 var buttonCell1 = new DataGridViewButtonCell();
                 dr.Cells[5] = buttonCell1;
+                dataGridView1[5, index].Value = "Clear";
             }
         }
     }

@@ -102,6 +102,8 @@ namespace SimpleHotelApp.Actors
                     }
                 }
                 var rGuests = JsonConvert.DeserializeObject<List<int>>(rResult.Guests);
+                if (rGuests == null)
+                    rGuests = new List<int>();
                 rGuests.Add(Convert.ToInt32(g));
 
                 Guests = JsonConvert.SerializeObject(rGuests);

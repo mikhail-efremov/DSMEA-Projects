@@ -218,6 +218,12 @@ namespace SimpleHotelApp
                 list[i].Id = i + 1;
             }
         }
+
+        private void GuestsForm_Activated(object sender, EventArgs e)
+        {
+            //TODO:
+            //Back inserting room no to this form
+        }
     }
 
     public enum WorkingStatus
