@@ -31,6 +31,8 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.labelActiveRole = new System.Windows.Forms.Label();
             this.infoLabelActiveRole = new System.Windows.Forms.Label();
+            this.infoLabelActiveRoom = new System.Windows.Forms.Label();
+            this.labelActiveRoom = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -68,11 +70,31 @@
             this.infoLabelActiveRole.TabIndex = 9;
             this.infoLabelActiveRole.Text = "Active Role:";
             // 
+            // infoLabelActiveRoom
+            // 
+            this.infoLabelActiveRoom.AutoSize = true;
+            this.infoLabelActiveRoom.Location = new System.Drawing.Point(195, 9);
+            this.infoLabelActiveRoom.Name = "infoLabelActiveRoom";
+            this.infoLabelActiveRoom.Size = new System.Drawing.Size(71, 13);
+            this.infoLabelActiveRoom.TabIndex = 11;
+            this.infoLabelActiveRoom.Text = "Active Room:";
+            // 
+            // labelActiveRoom
+            // 
+            this.labelActiveRoom.AutoSize = true;
+            this.labelActiveRoom.Location = new System.Drawing.Point(272, 9);
+            this.labelActiveRoom.Name = "labelActiveRoom";
+            this.labelActiveRoom.Size = new System.Drawing.Size(87, 13);
+            this.labelActiveRoom.TabIndex = 12;
+            this.labelActiveRoom.Text = "labelActiveRoom";
+            // 
             // GuestAdderToRoomForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(634, 332);
+            this.Controls.Add(this.labelActiveRoom);
+            this.Controls.Add(this.infoLabelActiveRoom);
             this.Controls.Add(this.labelActiveRole);
             this.Controls.Add(this.infoLabelActiveRole);
             this.Controls.Add(this.dataGridView1);
@@ -90,5 +112,7 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label labelActiveRole;
         private System.Windows.Forms.Label infoLabelActiveRole;
+        private System.Windows.Forms.Label infoLabelActiveRoom;
+        private System.Windows.Forms.Label labelActiveRoom;
     }
 }

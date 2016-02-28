@@ -49,7 +49,8 @@ namespace SimpleHotelApp
                         rooms.Add(new Room(Convert.ToInt32(r["Id"]), Convert.ToInt32(r["Number"]),
                             Convert.ToBoolean(Convert.ToInt32(r["Busy"]) == 1),
                             Convert.ToString(Convert.ToString(r["GuestId"]) == String.Empty ? 0 : r["GuestId"]),
-                            Convert.ToDecimal(r["CostPerDay"])));
+                            Convert.ToDecimal(r["CostPerDay"]),
+                            Convert.ToInt32(r["RoomsCount"])));
                     }
 
                     var bindingList = new BindingList<Room>(rooms);

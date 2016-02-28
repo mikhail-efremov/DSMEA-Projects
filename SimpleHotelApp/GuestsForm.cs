@@ -54,12 +54,12 @@ namespace SimpleHotelApp
 
         private void buttonSaveDB_Click(object sender, EventArgs e)
         {
-            var bindingList = dataGridView1.DataSource as BindingList<Guest>;
-            SaveInDataBase(bindingList.ToList());
+            SaveInDataBase();
         }
 
-        public void SaveInDataBase(List<Guest> guestsList)
+        public void SaveInDataBase()
         {
+            var guestsList = (dataGridView1.DataSource as BindingList<Guest>).ToList();
             if (ActiveStatus == WorkingStatus.Searching)
                 Guest.UpdateTableGuests(_connection, guestsList);
             else
@@ -113,7 +113,8 @@ namespace SimpleHotelApp
                             r["Location"] == DBNull.Value ? String.Empty : Convert.ToString(r["Location"]),
                             r["SettlementDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(r["SettlementDate"]),
                             r["DepartureDate"] == DBNull.Value ? (DateTime?)null : Convert.ToDateTime(r["DepartureDate"]),
-                            r["PayMoney"] == DBNull.Value ? (Decimal?)null : Convert.ToDecimal(r["PayMoney"])));
+                            r["PayMoney"] == DBNull.Value ? (Decimal?)null : Convert.ToDecimal(r["PayMoney"]),
+                            r["Room"] == DBNull.Value ? 0 : Convert.ToInt32(r["Room"])));
                     }
                     var bindingRooms = new BindingList<Guest>(rooms);
                     dataGridView1.DataSource = bindingRooms;
@@ -187,11 +188,10 @@ namespace SimpleHotelApp
             {
                 var list = ((BindingList<Guest>)(dataGridView1.DataSource)).ToList();
                 var a = list[e.RowIndex];
+                SaveInDataBase();
 
                 var guestAddederToRoomForm = new GuestAdderToRoomForm(_connection, _activeRole, a);
                 guestAddederToRoomForm.ShowDialog();
-                //    var guestForm = new RoomsAdderForm(_sqlConnection, ActiveRole, a);
-                //    guestForm.ShowDialog();
             }
         }
 
@@ -221,8 +221,48 @@ namespace SimpleHotelApp
 
         private void GuestsForm_Activated(object sender, EventArgs e)
         {
-            //TODO:
-            //Back inserting room no to this form
+            using (SQLiteConnection connect = new SQLiteConnection(@"Data Source=DataBase.db"))
+            {
+                connect.Open();
+                using (SQLiteCommand fmd = connect.CreateCommand())
+                {
+                    fmd.CommandText = @"SELECT * FROM tblRooms";
+                    fmd.CommandType = CommandType.Text;
+
+                    SQLiteDataReader r = fmd.ExecuteReader();
+
+                    var rooms = new List<Room>();
+
+                    while (r.Read())
+                    {
+                        rooms.Add(new Room(Convert.ToInt32(r["Id"]), Convert.ToInt32(r["Number"]),
+                            Convert.ToBoolean(Convert.ToInt32(r["Busy"]) == 1),
+                            Convert.ToString(Convert.ToString(r["GuestId"]) == String.Empty ? 0 : r["GuestId"]),
+                            Convert.ToDecimal(r["CostPerDay"]),
+                            Convert.ToInt32(r["RoomsCount"])));
+                    }
+
+                    var list = ((BindingList<Guest>)(dataGridView1.DataSource)).ToList();
+                    for (int i = 0; i < list.Count; i++)
+                    {
+                        foreach (var room in rooms)
+                        {
+                            var rGuests = JsonConvert.DeserializeObject<List<int>>(room.Guests);
+                            if (rGuests == null)
+                                continue;
+                            foreach (var g in rGuests)
+                            {
+                                if (list[i].Id == g)
+                                {
+                                    list[i].Room = g;
+                                    return;
+                                }
+                            }
+                        }
+                        list[i].Room = 0;
+                    }
+                }
+            }
         }
     }
 

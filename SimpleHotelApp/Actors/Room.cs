@@ -12,6 +12,7 @@ namespace SimpleHotelApp.Actors
         private bool _busy;
         private String _guests;
         private Decimal _costPerDay;
+        private Int32 _roomsCount;
 
         public Int32 ID
         {
@@ -36,28 +37,38 @@ namespace SimpleHotelApp.Actors
                 {
                     return _guests;
                 }
-                return null;
+                return String.Empty;
             }
             set
             {
                 if (!String.IsNullOrEmpty(value))
                     Busy = true;
+                else
+                    Busy = false;
                 _guests = value;
             }
         }
+
         public Decimal CostPerDay
         {
             get { return _costPerDay; }
             set { _costPerDay = value; }
         }
 
-        public Room(Int32 id, Int32 number, Boolean busy, String guests, Decimal costPerDay)
+        public Int32 RoomsCount
+        {
+            get { return _roomsCount; }
+            set { _roomsCount = value; }
+        }
+
+        public Room(Int32 id, Int32 number, Boolean busy, String guests, Decimal costPerDay, int roomsCount)
         {
             ID = id;
             Number = number;
             Busy = busy;
             AddGuests(guests);
             CostPerDay = costPerDay;
+            RoomsCount = roomsCount;
         }
 
         public void AddGuests(String g)
@@ -92,10 +103,12 @@ namespace SimpleHotelApp.Actors
                 var rResult = list[index];
                 foreach (var room in list)
                 {
-                    var a = JsonConvert.DeserializeObject<List<int>>(room.Guests);
-                    if (a == null)
+                    List<int> a;
+                    if(room.Guests == null)
                         a = new List<int>();
-                    fResult = a.Find(x => x == Convert.ToInt32(g));
+                    else
+                        a = JsonConvert.DeserializeObject<List<int>>(room.Guests);
+                    fResult = a == null ? 0 : a.Find(x => x == Convert.ToInt32(g));
                     if (fResult != 0)
                     {
                         return;
@@ -129,14 +142,15 @@ namespace SimpleHotelApp.Actors
         {
             SQLiteCommand insertSQL = new SQLiteCommand(
                 "INSERT INTO tblRooms " +
-                "(Id, Number, Busy, GuestId, CostPerDay) " +
-                "VALUES (?,?,?,?,?);", connection
+                "(Id, Number, Busy, GuestId, CostPerDay, RoomsCount) " +
+                "VALUES (?,?,?,?,?,?);", connection
                 );
             insertSQL.Parameters.Add(new SQLiteParameter("Id", room.ID));
             insertSQL.Parameters.Add(new SQLiteParameter("Number", room.Number));
             insertSQL.Parameters.Add(new SQLiteParameter("Busy", room.Busy));
             insertSQL.Parameters.Add(new SQLiteParameter("GuestId", room.Guests));
             insertSQL.Parameters.Add(new SQLiteParameter("CostPerDay", room.CostPerDay));
+            insertSQL.Parameters.Add(new SQLiteParameter("RoomsCount", room.RoomsCount));
             try
             {
                 insertSQL.ExecuteNonQuery();

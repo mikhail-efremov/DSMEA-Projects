@@ -26,6 +26,7 @@ namespace SimpleHotelApp
             _connection = connection;
             _activeRole = activeRole;
             labelActiveRole.Text = _activeRole.ToString();
+            labelActiveRoom.Text = guest.Id.ToString();
             _guest = guest;
         }
 
@@ -48,7 +49,7 @@ namespace SimpleHotelApp
 
                 Room.FullUpdateTable(_connection, _currentRoomsList.ToList());
             }
-            else if (e.ColumnIndex == 5)
+            else if (e.ColumnIndex == 6)
             {
                 var bRoom = _currentRoomsList[e.RowIndex];
                 bRoom.Guests = String.Empty;
@@ -76,7 +77,8 @@ namespace SimpleHotelApp
                         rooms.Add(new Room(Convert.ToInt32(r["Id"]), Convert.ToInt32(r["Number"]),
                             Convert.ToBoolean(Convert.ToInt32(r["Busy"]) == 1),
                             Convert.ToString(Convert.ToString(r["GuestId"]) == String.Empty ? 0 : r["GuestId"]),
-                            Convert.ToDecimal(r["CostPerDay"])));
+                            Convert.ToDecimal(r["CostPerDay"]),
+                            Convert.ToInt32(r["RoomsCount"])));
                     }
 
                     _currentRoomsList = new BindingList<Room>(rooms);
@@ -96,8 +98,8 @@ namespace SimpleHotelApp
                 var buttonCell = new DataGridViewButtonCell();
                 dr.Cells[3] = buttonCell;
                 var buttonCell1 = new DataGridViewButtonCell();
-                dr.Cells[5] = buttonCell1;
-                dataGridView1[5, index].Value = "Clear";
+                dr.Cells[6] = buttonCell1;
+                dataGridView1[6, index].Value = "Clear";
             }
         }
     }

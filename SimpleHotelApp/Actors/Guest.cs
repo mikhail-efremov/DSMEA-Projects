@@ -18,7 +18,7 @@ namespace SimpleHotelApp.Actors
         private DateTime? _settlementDate;
         private DateTime? _departureDate;
         private Decimal? _payMoney;
-        private List<String> _rooms;
+        private Int32 _room;
 
         public Int32 Id
         {
@@ -70,11 +70,10 @@ namespace SimpleHotelApp.Actors
             get { return _payMoney; }
             set { _payMoney = value; }
         }
-//        [Browsable(false)]
-        public String Rooms
+        public Int32 Room
         {
-            get { return JsonConvert.SerializeObject(_rooms); }
-            set { _rooms = (List<String>)JsonConvert.DeserializeObject(value);}
+            get { return _room; }
+            set { _room = value;}
         }
 
         public static Guest GetByID(Int32 Id)
@@ -91,7 +90,7 @@ namespace SimpleHotelApp.Actors
 
         public Guest(Int32 id, String firstName, String secondName, DateTime dateOfBirth,
             String passportCode, String citizenship, String location, DateTime? settlementDate,
-                DateTime? departureDate, Decimal? payMoney)
+                DateTime? departureDate, Decimal? payMoney, int room)
         {
             this.Id = id;
             this.FirstName = firstName;
@@ -103,6 +102,7 @@ namespace SimpleHotelApp.Actors
             this.SettlementDate = settlementDate;
             this.DepartureDate = departureDate;
             this.PayMoney = payMoney;
+            this.Room = room;
         }
 
         public static Guest Create(SQLiteConnection connection, String firstName, String secondName, DateTime dateOfBirth,
