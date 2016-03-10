@@ -1,8 +1,7 @@
 # SimpleHotelApp
 Application for Donbas State Mechanical Engineering Academy
 
-
-# Roles
+| Roles:
 
 | Role  | Login | Password |
 | ------------- | ------------- | ------------- |
