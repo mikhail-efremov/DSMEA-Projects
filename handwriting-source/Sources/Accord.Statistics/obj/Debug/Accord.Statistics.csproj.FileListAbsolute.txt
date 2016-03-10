@@ -1,0 +1,9 @@
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics\bin\Debug\Accord.Statistics.dll
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics\bin\Debug\Accord.Statistics.pdb
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics\bin\Debug\Accord.Math.dll
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics\bin\Debug\AForge.dll
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics\bin\Debug\AForge.Math.dll
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics\bin\Debug\Accord.Math.pdb
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics\obj\Debug\Accord.Statistics.csprojResolveAssemblyReference.cache
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics\obj\Debug\Accord.Statistics.dll
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics\obj\Debug\Accord.Statistics.pdb

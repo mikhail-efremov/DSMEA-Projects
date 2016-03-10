@@ -1,0 +1,7 @@
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Math\bin\Debug\Accord.Math.dll
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Math\bin\Debug\Accord.Math.pdb
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Math\bin\Debug\AForge.dll
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Math\bin\Debug\AForge.Math.dll
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Math\obj\Debug\Accord.Math.csprojResolveAssemblyReference.cache
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Math\obj\Debug\Accord.Math.dll
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Math\obj\Debug\Accord.Math.pdb

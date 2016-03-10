@@ -1,0 +1,15 @@
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics.Controls\bin\Debug\Accord.Controls.Statistics.dll
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics.Controls\bin\Debug\Accord.Controls.Statistics.pdb
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics.Controls\bin\Debug\Accord.Math.dll
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics.Controls\bin\Debug\Accord.Statistics.dll
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics.Controls\bin\Debug\AForge.dll
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics.Controls\bin\Debug\AForge.Math.dll
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics.Controls\bin\Debug\ZedGraph.dll
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics.Controls\bin\Debug\Accord.Math.pdb
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics.Controls\bin\Debug\Accord.Statistics.pdb
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics.Controls\bin\Debug\ZedGraph.xml
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics.Controls\obj\Debug\Accord.Controls.Statistics.csprojResolveAssemblyReference.cache
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics.Controls\obj\Debug\Accord.Controls.HistogramView.resources
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics.Controls\obj\Debug\Accord.Controls.Statistics.csproj.GenerateResource.Cache
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics.Controls\obj\Debug\Accord.Controls.Statistics.dll
+C:\Users\Mikhail\Downloads\accord-handwriting-source\Sources\Accord.Statistics.Controls\obj\Debug\Accord.Controls.Statistics.pdb
