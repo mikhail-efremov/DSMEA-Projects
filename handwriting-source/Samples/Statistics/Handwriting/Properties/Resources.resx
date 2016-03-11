@@ -124,4 +124,7 @@
   <data name="optdigits_tra" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\optdigits-tra.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="optdigits_test0" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\optdigits-test0.txt;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
 </root>

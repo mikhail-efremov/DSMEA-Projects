@@ -207,51 +207,44 @@ namespace Handwriting
         {
             lbStatus.Text = "Loading data. This may take a while...";
             Application.DoEvents();
-
-
+            
             // Load optdigits dataset into the DataGridView
-            StringReader reader = new StringReader(Properties.Resources.optdigits_tra);
-
-            int trainingStart = 0;
-            int trainingCount = 500;
-
-            int testingStart = 1000;
-            int testingCount = 500;
-
+            StringReader trainerReader = new StringReader(Properties.Resources.optdigits_tra);
+            StringReader test0Reader = new StringReader(Properties.Resources.optdigits_test0);
+            
             dgvAnalysisSource.Rows.Clear();
             dgvAnalysisTesting.Rows.Clear();
-
-            int c = 0;
+            
             while (true)
             {
                 char[] buffer = new char[(32 + 2) * 32];
-                int read = reader.ReadBlock(buffer, 0, buffer.Length);
-                string label = reader.ReadLine();
-
+                int read = trainerReader.ReadBlock(buffer, 0, buffer.Length);
+                string label = trainerReader.ReadLine();
 
                 if (read < buffer.Length || label == null) break;
 
-                if (c > trainingStart && c <= trainingStart + trainingCount)
-                {
-                    Bitmap bitmap = Extract(new String(buffer));
-                    double[] features = Extract(bitmap);
-                    int clabel = Int32.Parse(label);
-                    dgvAnalysisSource.Rows.Add(bitmap, clabel, features);
-                }
-                else if (c > testingStart && c <= testingStart + testingCount)
-                {
-                    Bitmap bitmap = Extract(new String(buffer));
-                    double[] features = Extract(bitmap);
-                    int clabel = Int32.Parse(label);
-                    dgvAnalysisTesting.Rows.Add(bitmap, clabel, null, features);
-                }
-
-                c++;
+                Bitmap bitmap = Extract(new String(buffer));
+                double[] features = Extract(bitmap);
+                int clabel = Int32.Parse(label);
+                dgvAnalysisSource.Rows.Add(bitmap, clabel, features);
             }
 
-            lbStatus.Text = String.Format(
-                "Dataset loaded. Click Run analysis to start the analysis.",
-                trainingCount, testingCount);
+            while (true)
+            {
+                char[] buffer = new char[(32 + 2) * 32];
+                int read = test0Reader.ReadBlock(buffer, 0, buffer.Length);
+                string label = test0Reader.ReadLine();
+
+                lbStatus.Text = String.Format(
+                "Dataset loaded. Click Run analysis to start the analysis.");
+
+                if (read < buffer.Length || label == null) break;
+
+                Bitmap bitmap = Extract(new String(buffer));
+                double[] features = Extract(bitmap);
+                int clabel = Int32.Parse(label);
+                dgvAnalysisTesting.Rows.Add(bitmap, clabel, null, features);
+            }
 
             btnSampleRunAnalysis.Enabled = true;
         }
@@ -262,6 +255,12 @@ namespace Handwriting
             {
                 // Get the input vector drawn
                 double[] input = canvas.GetDigit();
+
+                string[] sinput = new string[input.Length];
+                for (int i = 0; i < input.Length; i++)
+                    sinput[i] = input[i].ToString();
+
+                var ds = String.Join(String.Empty, sinput);
                 
                 // Classify the input vector
                 double[] responses;
@@ -467,8 +466,12 @@ namespace Handwriting
             zgc.Invalidate();
 
         }
-        #endregion
-       
 
+        #endregion
+
+        private void canvas_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
