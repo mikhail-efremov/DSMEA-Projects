@@ -13,6 +13,7 @@ using Accord.Statistics.Kernels;
 using System.Drawing.Imaging;
 using System.IO;
 using ZedGraph;
+// ReSharper disable SpecifyACultureInStringConversionExplicitly
 
 namespace Handwriting
 {
@@ -35,11 +36,11 @@ namespace Handwriting
         #region Data extraction
         private Bitmap Extract(string text)
         {
-            Bitmap bitmap = new Bitmap(32, 32, PixelFormat.Format32bppRgb);
-            string[] lines = text.Split(new String[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
-            for (int i = 0; i < 32; i++)
+            var bitmap = new Bitmap(32, 32, PixelFormat.Format32bppRgb);
+            var lines = text.Split(new String[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+            for (var i = 0; i < 32; i++)
             {
-                for (int j = 0; j < 32; j++)
+                for (var j = 0; j < 32; j++)
                 {
                     if (lines[i][j] == '0')
                         bitmap.SetPixel(j, i, Color.White);
@@ -51,9 +52,9 @@ namespace Handwriting
 
         private double[] Extract(Bitmap bmp)
         {
-            double[] features = new double[32 * 32];
-            for (int i = 0; i < 32; i++)
-                for (int j = 0; j < 32; j++)
+            var features = new double[32 * 32];
+            for (var i = 0; i < 32; i++)
+                for (var j = 0; j < 32; j++)
                     features[i * 32 + j] = (bmp.GetPixel(j, i).R == 255) ? 0 : 1;
 
             return features;
@@ -61,18 +62,18 @@ namespace Handwriting
 
         private double[] Preprocess(Bitmap bitmap)
         {
-            double[] features = new double[64];
+            var features = new double[64];
 
-            for (int m = 0; m < 8; m++)
+            for (var m = 0; m < 8; m++)
             {
-                for (int n = 0; n < 8; n++)
+                for (var n = 0; n < 8; n++)
                 {
-                    int c = m * 8 + n;
-                    for (int i = m * 4; i < m * 4 + 4; i++)
+                    var c = m * 8 + n;
+                    for (var i = m * 4; i < m * 4 + 4; i++)
                     {
-                        for (int j = n * 4; j < n * 4 + 4; j++)
+                        for (var j = n * 4; j < n * 4 + 4; j++)
                         {
-                            Color pixel = bitmap.GetPixel(j, i);
+                            var pixel = bitmap.GetPixel(j, i);
                             if (pixel.R == 0x00) // white
                                 features[c] += 1;
                         }
@@ -105,10 +106,10 @@ namespace Handwriting
 
 
             // Extract inputs and outputs
-            int rows = dgvAnalysisSource.Rows.Count;
-            double[,] input = new double[rows, 32 * 32];
-            int[] output = new int[rows];
-            for (int i = 0; i < rows; i++)
+            var rows = dgvAnalysisSource.Rows.Count;
+            var input = new double[rows, 32 * 32];
+            var output = new int[rows];
+            for (var i = 0; i < rows; i++)
             {
                 input.SetRow(i, (double[])dgvAnalysisSource.Rows[i].Cells["colTrainingFeatures"].Value);
                 output[i] = (int)dgvAnalysisSource.Rows[i].Cells["colTrainingLabel"].Value;
@@ -165,7 +166,7 @@ namespace Handwriting
             lbStatus.Text = "Classification started. This may take a while...";
             Application.DoEvents();
 
-            int hits = 0;
+            var hits = 0;
             progressBar.Visible = true;
             progressBar.Value = 0;
             progressBar.Step = 1;
@@ -174,10 +175,10 @@ namespace Handwriting
             // Extract inputs
             foreach (DataGridViewRow row in dgvAnalysisTesting.Rows)
             {
-                double[] input = (double[])row.Cells["colTestingFeatures"].Value;
-                int expected = (int)row.Cells["colTestingExpected"].Value;
+                var input = (double[])row.Cells["colTestingFeatures"].Value;
+                var expected = (int)row.Cells["colTestingExpected"].Value;
 
-                int output = kda.Classify(input);
+                var output = kda.Classify(input);
                 row.Cells["colTestingOutput"].Value = output;
 
                 if (expected == output)
@@ -199,50 +200,49 @@ namespace Handwriting
 
             progressBar.Visible = false;
 
-            lbStatus.Text = String.Format("Classification complete. Hits: {0}/{1} ({2:0%})",
-                hits, dgvAnalysisTesting.Rows.Count, (double)hits / dgvAnalysisTesting.Rows.Count);
+            lbStatus.Text =
+                $"Classification complete. Hits: {hits}/{dgvAnalysisTesting.Rows.Count} ({(double) hits/dgvAnalysisTesting.Rows.Count:0%})";
         }
 
         private void btnLoad_Click(object sender, EventArgs e)
         {
-            lbStatus.Text = "Loading data. This may take a while...";
+            lbStatus.Text = @"Loading data. This may take a while...";
             Application.DoEvents();
             
             // Load optdigits dataset into the DataGridView
-            StringReader trainerReader = new StringReader(Properties.Resources.optdigits_tra);
-            StringReader test0Reader = new StringReader(Properties.Resources.optdigits_test0);
+            var trainerReader = new StringReader(Properties.Resources.optdigits_tra);
+            var test0Reader = new StringReader(Properties.Resources.optdigits_test0);
             
             dgvAnalysisSource.Rows.Clear();
             dgvAnalysisTesting.Rows.Clear();
             
             while (true)
             {
-                char[] buffer = new char[(32 + 2) * 32];
-                int read = trainerReader.ReadBlock(buffer, 0, buffer.Length);
-                string label = trainerReader.ReadLine();
+                var buffer = new char[(32 + 2) * 32];
+                var read = trainerReader.ReadBlock(buffer, 0, buffer.Length);
+                var label = trainerReader.ReadLine();
 
                 if (read < buffer.Length || label == null) break;
 
-                Bitmap bitmap = Extract(new String(buffer));
-                double[] features = Extract(bitmap);
-                int clabel = Int32.Parse(label);
+                var bitmap = Extract(new string(buffer));
+                var features = Extract(bitmap);
+                var clabel = int.Parse(label);
                 dgvAnalysisSource.Rows.Add(bitmap, clabel, features);
             }
 
             while (true)
             {
-                char[] buffer = new char[(32 + 2) * 32];
-                int read = test0Reader.ReadBlock(buffer, 0, buffer.Length);
-                string label = test0Reader.ReadLine();
+                var buffer = new char[(32 + 2) * 32];
+                var read = test0Reader.ReadBlock(buffer, 0, buffer.Length);
+                var label = test0Reader.ReadLine();
 
-                lbStatus.Text = String.Format(
-                "Dataset loaded. Click Run analysis to start the analysis.");
+                lbStatus.Text = @"Dataset loaded. Click Run analysis to start the analysis.";
 
                 if (read < buffer.Length || label == null) break;
 
-                Bitmap bitmap = Extract(new String(buffer));
-                double[] features = Extract(bitmap);
-                int clabel = Int32.Parse(label);
+                var bitmap = Extract(new String(buffer));
+                var features = Extract(bitmap);
+                var clabel = Int32.Parse(label);
                 dgvAnalysisTesting.Rows.Add(bitmap, clabel, null, features);
             }
 
@@ -253,38 +253,36 @@ namespace Handwriting
         {
             if (kda != null)
             {
-                // Get the input vector drawn
-                double[] input = canvas.GetDigit();
+                var input = canvas.GetDigit();
 
-                string[] sinput = new string[input.Length];
-                for (int i = 0; i < input.Length; i++)
+                var sinput = new string[input.Length];
+                for (var i = 0; i < input.Length; i++)
                     sinput[i] = input[i].ToString();
 
-                var ds = String.Join(String.Empty, sinput);
-                
                 // Classify the input vector
                 double[] responses;
-                int num = kda.Classify(input, out responses);
+                var num = kda.Classify(input, out responses);
 
                 // Set the actual classification answer 
                 lbCanvasClassification.Text = num.ToString();
 
 
                 // Scale the responses to a [0,1] interval
-                double max = responses.Max();
-                double min = responses.Min();
+                var max = responses.Max();
+                var min = responses.Min();
 
-                for (int i = 0; i < responses.Length; i++)
+                for (var i = 0; i < responses.Length; i++)
                     responses[i] = Tools.Scale(min, max, 0, 1, responses[i]);
 
                 // Create the bar graph to show the relative responses
                 CreateBarGraph(graphClassification, responses);
             }
+            // Get the input vector drawn
         }
 
         private void btnCanvasClear_Click(object sender, EventArgs e)
         {
-            canvas.Clear();
+            canvas?.Clear();
         }
 
         private void canvas_MouseUp(object sender, MouseEventArgs e)
@@ -301,17 +299,19 @@ namespace Handwriting
         {
             if (dgvClasses.CurrentRow != null)
             {
-                DiscriminantAnalysisClass dclass = (DiscriminantAnalysisClass)dgvClasses.CurrentRow.DataBoundItem;
+                var dclass = (DiscriminantAnalysisClass)dgvClasses.CurrentRow.DataBoundItem;
 
-                ImageList list = new ImageList();
+                var list = new ImageList();
 
                 lvClass.Items.Clear();
                 lvClass.LargeImageList = list;
-                int[] idx = dclass.Indexes;
-                for (int i = 0; i < idx.Length; i++)
+                var idx = dclass.Indexes;
+                for (var i = 0; i < idx.Length; i++)
                 {
-                    Bitmap bitmap = (Bitmap)dgvAnalysisSource.Rows[idx[i]].Cells["colTrainingImage"].Value;
-                    list.Images.Add(bitmap);
+                    {
+                        var bitmap = (Bitmap)dgvAnalysisSource.Rows[idx[i]].Cells["colTrainingImage"].Value;
+                        list.Images.Add(bitmap);
+                    }
 
                     var item = new ListViewItem(String.Empty, i);
                     lvClass.Items.Add(item);
@@ -324,7 +324,7 @@ namespace Handwriting
         #region ZedGraph Creation
         public void CreateComponentCumulativeDistributionGraph(ZedGraphControl zgc)
         {
-            GraphPane myPane = zgc.GraphPane;
+            var myPane = zgc.GraphPane;
 
             myPane.CurveList.Clear();
 
@@ -335,17 +335,17 @@ namespace Handwriting
             myPane.XAxis.Title.Text = "Components";
             myPane.YAxis.Title.Text = "Percentage";
 
-            PointPairList list = new PointPairList();
-            for (int i = 0; i < kda.Discriminants.Count; i++)
+            var list = new PointPairList();
+            foreach (var t in kda.Discriminants)
             {
-                list.Add(kda.Discriminants[i].Index, kda.Discriminants[i].CumulativeProportion);
+                list.Add(t.Index, t.CumulativeProportion);
             }
 
             // Hide the legend
             myPane.Legend.IsVisible = false;
 
             // Add a curve
-            LineItem curve = myPane.AddCurve("label", list, Color.Red, SymbolType.Circle);
+            var curve = myPane.AddCurve("label", list, Color.Red, SymbolType.Circle);
             curve.Line.Width = 2.0F;
             curve.Line.IsAntiAlias = true;
             curve.Symbol.Fill = new Fill(Color.White);
@@ -366,7 +366,7 @@ namespace Handwriting
 
         public void CreateComponentDistributionGraph(ZedGraphControl zgc)
         {
-            GraphPane myPane = zgc.GraphPane;
+            var myPane = zgc.GraphPane;
             myPane.CurveList.Clear();
 
             // Set the GraphPane title
@@ -383,20 +383,18 @@ namespace Handwriting
             myPane.Legend.IsVisible = false;
 
             // Add some pie slices
-            for (int i = 0; i < kda.Discriminants.Count; i++)
+            for (var i = 0; i < kda.Discriminants.Count; i++)
             {
                 myPane.AddPieSlice(kda.Discriminants[i].Proportion, colors[i % colors.Length], 0.1, kda.Discriminants[i].Index.ToString());
             }
-
-
+            
             myPane.XAxis.Scale.MinAuto = true;
             myPane.XAxis.Scale.MaxAuto = true;
             myPane.YAxis.Scale.MinAuto = true;
             myPane.YAxis.Scale.MaxAuto = true;
             myPane.XAxis.Scale.MagAuto = true;
             myPane.YAxis.Scale.MagAuto = true;
-
-
+            
             // Calculate the Axis Scale Ranges
             zgc.AxisChange();
             zgc.Invalidate();
@@ -404,7 +402,7 @@ namespace Handwriting
 
         public void CreateBarGraph(ZedGraphControl zgc, double[] discriminants)
         {
-            GraphPane myPane = zgc.GraphPane;
+            var myPane = zgc.GraphPane;
 
             myPane.CurveList.Clear();
 
@@ -450,13 +448,12 @@ namespace Handwriting
 
 
             // Create data points for three BarItems using Random data
-            PointPairList list = new PointPairList();
+            var list = new PointPairList();
 
-            for (int i = 0; i < discriminants.Length; i++)
+            for (var i = 0; i < discriminants.Length; i++)
                 list.Add(discriminants[i] * 100, i);
 
-            BarItem myCurve = myPane.AddBar("b", list, Color.DarkBlue);
-
+            myPane.AddBar("b", list, Color.DarkBlue);
 
             // Set BarBase to the YAxis for horizontal bars
             myPane.BarSettings.Base = BarBase.Y;
@@ -464,7 +461,6 @@ namespace Handwriting
 
             zgc.AxisChange();
             zgc.Invalidate();
-
         }
 
         #endregion
