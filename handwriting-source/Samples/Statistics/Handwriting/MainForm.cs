@@ -137,13 +137,9 @@ namespace Handwriting
 
 
             // Show information about the analysis in the form
-            dgvPrincipalComponents.DataSource = kda.Discriminants;
-            dgvFeatureVectors.DataSource = new ArrayDataView(kda.DiscriminantMatrix);
             dgvClasses.DataSource = kda.Classes;
 
             // Create the component graphs
-            CreateComponentCumulativeDistributionGraph(graphCurve);
-            CreateComponentDistributionGraph(graphShare);
 
             lbStatus.Text = "Analysis complete. Click Classify to test the analysis.";
 
@@ -211,6 +207,7 @@ namespace Handwriting
             
             // Load optdigits dataset into the DataGridView
             var trainerReader = new StringReader(Properties.Resources.optdigits_tra);
+            var d = new StringReader(Properties.Resources.optdigits_tes);
             var test0Reader = new StringReader(Properties.Resources.optdigits_test0);
             
             dgvAnalysisSource.Rows.Clear();
@@ -265,8 +262,7 @@ namespace Handwriting
 
                 // Set the actual classification answer 
                 lbCanvasClassification.Text = num.ToString();
-
-
+                
                 // Scale the responses to a [0,1] interval
                 var max = responses.Max();
                 var min = responses.Min();
